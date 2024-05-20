@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Wind-Cache-Docs/Steps.md",
+                "file": "Requirements.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Wind-Cache-Docs/Steps.md",
+                "file": "Requirements.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Wind-Cache-Docs/Steps.md",
+                "file": "Requirements.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Wind-Cache-Docs/Steps.md"
+                "file": "Requirements.md"
               }
             }
           }
@@ -148,6 +148,8 @@
   },
   "active": "4b43b265cf6fa77d",
   "lastOpenFiles": [
+    "Requirements.md",
+    "Wind-Cache-Library",
     "Wind-Cache-Docs/publish/update-publish-settings-github-actions.md",
     "Wind-Cache-Docs/publish/install-linked-blog-starter-locally.md",
     "Wind-Cache-Docs/publish/home.md",
