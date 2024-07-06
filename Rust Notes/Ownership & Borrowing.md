@@ -59,5 +59,7 @@ fn main() {
 ```
 
 - Rules:
-	1. You can have either one mutable reference or any number of immutable references.
+	1. At any given time, You can have either:
+		- one mutable reference, or
+		- any number of immutable references.
 	2. References must always be valid.
