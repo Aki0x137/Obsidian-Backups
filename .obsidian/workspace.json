@@ -18,8 +18,33 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "71fc807cb96c1f5c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Rust Notes/Rust Atomics and Memory Ordering.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "7bbe6b421e2e8faf",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Rust Notes/Ownership & Borrowing.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -85,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Wind-Cache-Library/Requirements.md",
+                "file": "Rust Notes/Ownership & Borrowing.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Wind-Cache-Library/Requirements.md",
+                "file": "Rust Notes/Ownership & Borrowing.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Wind-Cache-Library/Requirements.md"
+                "file": "Rust Notes/Ownership & Borrowing.md"
               }
             }
           }
@@ -146,9 +171,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "01aa52feaf57f1ed",
+  "active": "7bbe6b421e2e8faf",
   "lastOpenFiles": [
+    "Rust Notes/Rust Atomics and Memory Ordering.md",
+    "Rust Notes/Ownership & Borrowing.md",
     "Wind-Cache-Library/Requirements.md",
+    "Rust Notes",
     "Wind-Cache-Library",
     "Wind-Cache-Docs/publish/update-publish-settings-github-actions.md",
     "Wind-Cache-Docs/publish/install-linked-blog-starter-locally.md",
