@@ -182,15 +182,16 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "01aa52feaf57f1ed",
+  "active": "4b43b265cf6fa77d",
   "lastOpenFiles": [
+    "Rust Notes/Rust Atomics and Memory Ordering.md",
+    "Distributed-Systems-Cohort/Thinking Concurrency.md",
+    "Architectural Scalability.md",
     "Distributed-Systems-Cohort/Pasted image 20240714153535.png",
     "Distributed-Systems-Cohort/Screenshot from 2024-07-14 13-15-29.png",
     "Wind-Cache-Library/Requirements.md",
-    "Distributed-Systems-Cohort/Thinking Concurrency.md",
     "Rust Notes/Ownership & Borrowing.md",
     "Distributed-Systems-Cohort",
-    "Rust Notes/Rust Atomics and Memory Ordering.md",
     "Rust Notes",
     "Wind-Cache-Library",
     "Wind-Cache-Docs/publish/update-publish-settings-github-actions.md",
@@ -220,7 +221,6 @@
     "Wind-Cache-Docs/publish/attachments/github-secrets-vercel.png",
     "Wind-Cache-Docs/publish/attachments/fork-linked-blog-starter-md.png",
     "Wind-Cache-Docs/publish/attachments/fn-website-demo.gif",
-    "Wind-Cache-Docs/publish/attachments/enable-actions-github.png",
     "Wind-Cache-Docs/publish/attachments",
     "Wind-Cache-Docs/publish",
     "Wind-Cache-Docs/README.md",
