@@ -1,0 +1,51 @@
+This note tries to create mental model for concurrency and parallelism. These mental models extrapolate(have a 1:1 mapping) well, when we talk abut distributed system.
+Concepts like message passing, consistency, consensus are common in both concurrent programs and distributed systems.
+
+Few things before we move ahead:
+- Anything discussed with respect to distributed systems will be around, **networked multi-core servers**.
+- We have cluster/racks of these kind of servers, and each node in this system is connected(networked).
+# Why are we discussing parallel and high performance software?
+
+## Moore's Law:
+Moore's Law stated that the number of transistors on a microchip would double roughly every two years, leading to exponential growth in processing power.
+
+So, the same software written in let's say in year 1999, would perform better, when it runs on a better processor, created in 2010. Improvement in single thread performance(hardware improvements), led to automatic improvement in performance of software without any change.
+
+However, Moore's Law held true till last decade(early 2020s) but is now nearing its physical limits. Transistors are approaching atomic size, making further miniaturisation difficult. With slower growth in core speed, developers can no longer solely rely on Moore's Law for performance gains.
+
+![[Screenshot from 2024-07-14 13-15-29.png]]
+
+So, software engineers should now focus on techniques like code optimisation, parallel programming, and utilising multiple cores effectively. By squeezing the most out of current hardware, they can achieve performance improvements that were previously attained through Moore's Law alone.
+
+We have to change the way we think about programs, and ask what are the primitives and software constructs, which will change, when I want my program to make use of multi core in the chip available to me.
+## Why is Concurrency hard?
+- Multiprocessor programming is complex due to the inherent asynchrony of modern computer systems.
+- Async events, like *interrupts, preemption, cache misses and failures* can halt or delay activities without warning.
+- These delays are unpredictable and can very widely:
+	- A cache miss might delay a processor for few instructions.
+	- A page fault can delay it got millions of instructions.
+	- OS preemption can result in delays spanning hundreds of millions of instructions.
+Example: https://vaibhaw-vipul.medium.com/matrix-multiplication-optimizing-the-code-from-6-hours-to-1-sec-70889d33dcfa
+# Mutual Exclusion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Concurrency v/s Parallelism

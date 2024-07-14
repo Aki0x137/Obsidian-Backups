@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Wind-Cache-Library/Requirements.md",
+                "file": "Distributed-Systems-Cohort/Thinking Concurrency.md",
                 "mode": "source",
                 "source": false
               }
@@ -42,9 +42,20 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "368ed5d39cee243a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Distributed-Systems-Cohort/Thinking Concurrency.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -110,7 +121,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Rust Notes/Ownership & Borrowing.md",
+                "file": "Distributed-Systems-Cohort/Thinking Concurrency.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +138,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Rust Notes/Ownership & Borrowing.md",
+                "file": "Distributed-Systems-Cohort/Thinking Concurrency.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Rust Notes/Ownership & Borrowing.md"
+                "file": "Distributed-Systems-Cohort/Thinking Concurrency.md"
               }
             }
           }
@@ -171,11 +182,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "7bbe6b421e2e8faf",
+  "active": "4b43b265cf6fa77d",
   "lastOpenFiles": [
-    "Rust Notes/Rust Atomics and Memory Ordering.md",
-    "Rust Notes/Ownership & Borrowing.md",
+    "Distributed-Systems-Cohort/Screenshot from 2024-07-14 13-15-29.png",
     "Wind-Cache-Library/Requirements.md",
+    "Distributed-Systems-Cohort/Thinking Concurrency.md",
+    "Rust Notes/Ownership & Borrowing.md",
+    "Distributed-Systems-Cohort",
+    "Rust Notes/Rust Atomics and Memory Ordering.md",
     "Rust Notes",
     "Wind-Cache-Library",
     "Wind-Cache-Docs/publish/update-publish-settings-github-actions.md",
