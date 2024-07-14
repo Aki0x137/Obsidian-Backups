@@ -28,7 +28,7 @@ We have to change the way we think about programs, and ask what are the primitiv
 Example: https://vaibhaw-vipul.medium.com/matrix-multiplication-optimizing-the-code-from-6-hours-to-1-sec-70889d33dcfa
 
 ## Concurrency v/s Parallelism
-
+TODO: Watch Rob Pike's video on same and write summarisation here
 
 # Mutual Exclusion
 In concurrent programming, mutual exclusion is a fundamental concept for ensuring data integrity. It refers to the idea that only one thread of execution can access a shared resource(like a piece of memory, critical section in code or a file) at a time.
@@ -75,7 +75,7 @@ Speedup Factor =  s(p) = t(s) / { f*t(s) + {[(1 - f)*t(s)] / p} }
 The above equation is mathematical representation of Amdahl's law.
 
 ![[Pasted image 20240714153535.png]]
-### Gustafson's Law
+### Gustafson's Law:
 - Amdahl's law doesn't take into account **Algorithmic Scalability** though.
 - When working in a multiprocessing world, we also have to think from algorithm side. Algorithm also need to incorporate 'n' processors.
 - Combined Architectural Scalability and Algorithmic scalability suggests increased problem size(larger inputs in problem statement) can be accommodated with increase in system size for particular architecture and algorithm.
