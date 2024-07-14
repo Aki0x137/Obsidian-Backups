@@ -53,4 +53,38 @@ Example: https://vaibhaw-vipul.medium.com/matrix-multiplication-optimizing-the-c
 - A principle that states that the maximum potential improvement to the the performance of a system is limited by the portion of the system/code that cannot be parallelised or improved.
 - Imagine a task with sequential (non-parallelizable) parts(around 40%) and parallelizable parts(rest 60%). Amdahl's Law lets you calculate the maximum speedup achievable by adding more processors, considering the percentage of time spent on the sequential portion. In this case 60% of code will never improve by adding more processors, and only the 40% code can be parallelised and optimised.
 - In simpler terms, the more a task relies on unparallelizable steps, the less benefit you get from adding more processing power.
+- The speedup factor refers to how much faster a program runs using multiple processors compared to running it on a single processor.
+```
+  Speedup Factor =  s(p) = t(s) / t(p)
+``` 
+where: 
+- p = Number of processors
+- T(s) = execution time on one processor 
+- T(p) = execution time using p processors.
 
+- There are several factors that affect the speedup:
+	1. periods of busy v/s the idle times in processor
+	2. some extra constants that need to be calculated again and again
+	3. communication time
+- Lets assume `f` the fraction of computation which can't be divided into concurrent task, an no overhead is incurred when tasks are divided.
+- The time to perform computation with `p` processors is given by: 
+  `f*t(s) + {[(1 - f)*t(s)] / p} ` 
+- The speedup factor becomes:
+```
+Speedup Factor =  s(p) = t(s) / { f*t(s) + {[(1 - f)*t(s)] / p} }
+
+= p / [1 - (p - 1)*f]
+```
+The above equation is mathematical representation of Amdahl's law.
+
+![[Pasted image 20240714153535.png]]
+### Gustafson's Law
+- 
+- Gustafson's Law acknowledges that with more processors, we can tackle larger problems. This allows the parallelizable portion of the workload to scale, potentially leading to greater speedup than Amdahl's Law might predict for a fixed-size problem.
+- Gustafson's Law suggests that by throwing more processing power at problems that can be effectively parallelised and also scaled in size, we can achieve significant performance gains even with inherent sequential portions.
+
+```
+Speedup Factor =  s(p) = p - f(p - 1)
+```
+- p = Number of processors
+- f = The fraction of the workload that is inherently sequential (unchangeable)
