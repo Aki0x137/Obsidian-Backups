@@ -26,26 +26,31 @@ We have to change the way we think about programs, and ask what are the primitiv
 	- A page fault can delay it got millions of instructions.
 	- OS preemption can result in delays spanning hundreds of millions of instructions.
 Example: https://vaibhaw-vipul.medium.com/matrix-multiplication-optimizing-the-code-from-6-hours-to-1-sec-70889d33dcfa
+
+## Concurrency v/s Parallelism
+
+
 # Mutual Exclusion
 
 
 
 
 
+### How do we make sure our protocol or algorithm is correct?
+#### 1. Mutual Exclusion:
+- Threads are prevented from accessing the same resource(memory address or critical region in code) simultaneously.
+#### 2. Deadlock-Freedom:
+- If a thread want to access a resource, it eventually succeeds.
+- If two or more threads want to access a resource, at least one succeeds.
+#### 3. Starvation Freedom:
+- Whether a thread can eventually access the shared resource.
+#### 4. Waiting:
+- Threads make progress within a bounded number of steps, irrespective of the activity from other threads.
 
+## Harsh Realities of Parallel Programming
 
+### Amdahl's Law:
+- A principle that states that the maximum potential improvement to the the performance of a system is limited by the portion of the system/code that cannot be parallelised or improved.
+- Imagine a task with sequential (non-parallelizable) parts(around 40%) and parallelizable parts(rest 60%). Amdahl's Law lets you calculate the maximum speedup achievable by adding more processors, considering the percentage of time spent on the sequential portion. In this case 60% of code will never improve by adding more processors, and only the 40% code can be parallelised and optimised.
+- In simpler terms, the more a task relies on unparallelizable steps, the less benefit you get from adding more processing power.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Concurrency v/s Parallelism
