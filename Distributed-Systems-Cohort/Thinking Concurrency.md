@@ -28,6 +28,8 @@ We have to change the way we think about programs, and ask what are the primitiv
 Example: https://vaibhaw-vipul.medium.com/matrix-multiplication-optimizing-the-code-from-6-hours-to-1-sec-70889d33dcfa
 
 ## Concurrency v/s Parallelism
+**Concurrency** focuses on managing multiple tasks that can potentially run at the same time, even if they share processing power (like multitasking on a single CPU). 
+**Parallelism** explicitly utilizes multiple processors or cores to execute tasks truly simultaneously.
 TODO: Watch Rob Pike's video on same and write summarisation here
 
 # Mutual Exclusion
