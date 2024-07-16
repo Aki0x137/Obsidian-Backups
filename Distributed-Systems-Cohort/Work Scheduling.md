@@ -33,6 +33,10 @@ We want to build a parallel scheduler, where we can:
 - Below is a diagram, explaining typical, work scheduling flow for parallel computation. It is essentially a DAG:
 
 ![[Excalidraw/Parallel Computation DAG|{width=100%}]]
+
+### Types of Schedulers
+1. Greedy
+2. Non Greedy
 ### Design Constraints on Work Scheduler
 1. The DAG should be generated dynamically:
    - Based on inputs and programs control flow
@@ -45,4 +49,26 @@ We want to build a parallel scheduler, where we can:
 	-  due to the overhead that comes with it.
 6. If possible, should schedule related tasks in the same processor
 	- Access same cache lines
+
+#### Approach 1: Having a manager
+#### Approach 2: Share a common Queue
+1. All processors share a common work queue
+2. Every processor dequeue a task from work queue
+3. On task completion, enqueue the generated task to the work queue
+**Problems**:
+1. Synchronization
+2. Poor cache utilization
+3. Unbounded space requirements for queue
+#### Approach 3: Work sharing instead of stealing
+1. Every processor pushes and pops tasks into a local work queue
+2. When the work queue gets large, send tasks to other processors
+**Problems**:
+1. If all processors are busy, each will spend time trying to offload extra tasks
+	1. This means they will try to perform communication when busy, which will violate constraint 5
+2. It's difficult to know the load on processors.
+	- A processor with two large tasks might take longer than a processor with five small tasks.
+3. A task might get shared multiple times by multiple bust processors before being executed, until an available processor is found.
+4. The Approach is *non greedy*, some processors can be idle.
+
+#### Approach 4:
 
