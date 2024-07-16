@@ -52,13 +52,13 @@ We want to build a parallel scheduler, where we can:
    - The graph is not known ahead of time
 2. The amount of work done by a task is dynamic
 3. The number of processors can change at runtime
-4. Should be greedy in nature:
+4.  Should be greedy in nature:
 	- No processor should be idle when tasks are pending
 5. Limited communication between processors
 	-  due to the overhead that comes with it.
 6. If possible, should schedule related tasks in the same processor
 	- Access same cache lines
-- Point 5 is important for us.
+- Point 4 & 5 is important for us.
 #### Approach 1: Manager/Centralized Scheduler
 1. We can have a manager that serves as a centralized scheduler running on one processor.
 2. The manager distributes task to other processors.
@@ -85,5 +85,46 @@ We want to build a parallel scheduler, where we can:
 	- Each processor only has information about its own workload and the size (not necessarily the execution time) of tasks in its queue. It doesn't have a complete picture of the workload on other processors.
 3. **Task Bouncing**: A task might get shared multiple times by multiple bust processors before being executed, until an available processor is found.
 4. **Non-greedy**: The Approach is *non greedy*, some processors can be idle for some time, waiting for a processor to share some work.
+
+The next section will cover the desired approach, which is work stealing.
+
+### Work Stealing
+Work stealing is a popular approach for parallel work scheduling that addresses the limitations of previous approaches discussed.
+#### Key aspects:
+1. **Only the idle workers steal**:
+	- In a work-stealing scheduler, workers (or processors) that run out of work become idle. Instead of waiting, these idle workers actively seek tasks from other busy workers to keep themselves productive.
+2. **Each processor maintains a local work queue**: 
+	- Each processor has its own local queue to store tasks it needs to execute. This helps reduce contention since most of the time, processors operate independently on their local queues.
+3. **Pushes generated tasks into the local queue**:
+	- When a processor creates new tasks, it pushes them onto its local queue. This ensures that the processor can continue working on related tasks, leveraging data locality.
+4. **When local queue is empty, steal a task from another processor**:
+	- If a processor’s local queue is empty, it attempts to steal tasks from the queues of other processors. This ensures that no processor remains idle if there are still tasks left to execute.
+
+**Pros**:
+- **Communication is only done when idle**: Communication between processors happens only when a processor is idle and needs to steal tasks. This minimizes unnecessary communication overhead when all processors are busy.
+	- There is little to no communication when all processors are in full throttle.
+- **Each task is stolen at most once**: Once a task is stolen by a processor, it’s removed from the original queue, ensuring that no other processor steals it again, thus avoiding duplicate work.
+- This scheduler is greedy, assuming stealing succeeds always
+- **Tasks are identified dynamically, as execution proceeds**: Tasks are not pre-allocated statically. Instead, they are dynamically identified and assigned as the program runs, allowing for flexibility in task distribution.
+- **Tasks are performed by a (usually fixed-size) pool of workers**: A predefined number of workers execute the tasks. This fixed pool simplifies the management of resources.
+	- At the hardware level, a worker corresponds to a CPU core.
+	- At the software level, workers are usually represented by threads, one per core.
+- Any worker can 'steal' a task that was created by another worker
+- **Dynamic load balancing (near greedy)**: Work distributed automatically from workers that have unstarted tasks to workers that have no tasks.
+	- Work stealing (and parallelism in general) require that work be divided into independent tasks.
+	- Once a worker begins a task, it cannot be shared with other workers unless it is subdivided into smaller tasks.
+	
+**Queue Data Structure**: A special double ended queue is used to maintain the local task queue for each worker. It has the following operations:
+1. Push: Local processor adds newly created tasks
+2. Pop: Local processor removes tasks to execute
+3. Steal: Remote process removes task
+Advantages of using queue:
+- Stealers don't interact with local processor when queue has more than one tasks
+	- Minimizing interaction reduces contention and overhead, improving efficiency.
+- Popping recently pushed tasks improves locality:
+	- Accessing recently added tasks can benefit from cache locality, speeding up execution.
+- Stealers take the oldest tasks, which are likely to be the largest:
+	- Larger tasks are more worthwhile for stealing because they provide more work, reducing the frequency of stealing operations.
+
 
 
