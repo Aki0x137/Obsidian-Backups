@@ -11,11 +11,11 @@ Moore's Law stated that the number of transistors on a microchip would double ro
 
 So, the same software written in let's say in year 1999, would perform better, when it runs on a better processor, created in 2010. Improvement in single thread performance(hardware improvements), led to automatic improvement in performance of software without any change. This phenomenon of system's ability to handle growing demands by adding resources or improvement is underlying hardware it runs on is called Architectural scalability.
 
-However, Moore's Law held true till last decade(early 2020s) but is now nearing its physical limits. Transistors are approaching atomic size, making further miniaturisation difficult. With slower growth in core speed, developers can no longer solely rely on Moore's Law for performance gains.
+However, Moore's Law held true till last decade(early 2020s) but is now nearing its physical limits. Transistors are approaching atomic size, making further miniaturization difficult. With slower growth in core speed, developers can no longer solely rely on Moore's Law for performance gains.
 
 ![[Screenshot from 2024-07-14 13-15-29.png]]
 
-So, software engineers should now focus on techniques like code optimisation, parallel programming, and utilising multiple cores effectively. By squeezing the most out of current hardware, they can achieve performance improvements that were previously attained through Moore's Law alone.
+So, software engineers should now focus on techniques like code optimization, parallel programming, and utilizing multiple cores effectively. By squeezing the most out of current hardware, they can achieve performance improvements that were previously attained through Moore's Law alone.
 
 We have to change the way we think about programs, and ask what are the primitives and software constructs, which will change, when I want my program to make use of multi core in the chip available to me.
 ## Why is Concurrency hard?
