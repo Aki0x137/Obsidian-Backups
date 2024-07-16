@@ -166,17 +166,18 @@
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
   "active": "da4462d75cf75bb0",
   "lastOpenFiles": [
+    "Distributed-Systems-Cohort/Thinking Concurrency.md",
+    "Distributed-Systems-Cohort/Requirements.md",
+    "Distributed-Systems-Cohort/{Draft} Non Blocking Data Structures.md",
+    "Distributed-Systems-Cohort/Work Scheduling.md",
     "Rust Notes/Rust Atomics and Memory Ordering.md",
     "Excalidraw/Parallel Computation DAG.md",
-    "Distributed-Systems-Cohort/Work Scheduling.md",
-    "Distributed-Systems-Cohort/{Draft} Non Blocking Data Structures.md",
-    "Distributed-Systems-Cohort/Requirements.md",
-    "Distributed-Systems-Cohort/Thinking Concurrency.md",
     "Excalidraw/Parallel computation DAG.md",
     "Excalidraw/Drawing 2024-07-14 22.10.00.excalidraw.md",
     "Excalidraw",
