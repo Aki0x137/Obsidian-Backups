@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Distributed-Systems-Cohort/Co-routines and GPU.md",
+                "file": "Distributed-Systems-Cohort/Coroutines.md",
                 "mode": "source",
                 "source": false
               }
@@ -107,7 +107,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Distributed-Systems-Cohort/Co-routines and GPU.md",
+                "file": "Distributed-Systems-Cohort/Coroutines.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -124,7 +124,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Distributed-Systems-Cohort/Co-routines and GPU.md",
+                "file": "Distributed-Systems-Cohort/Coroutines.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -147,7 +147,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Distributed-Systems-Cohort/Co-routines and GPU.md"
+                "file": "Distributed-Systems-Cohort/Coroutines.md"
               }
             }
           }
@@ -173,7 +173,7 @@
   "active": "da4462d75cf75bb0",
   "lastOpenFiles": [
     "Wind-Cache-Library/Requirements.md",
-    "Distributed-Systems-Cohort/Co-routines and GPU.md",
+    "Distributed-Systems-Cohort/Coroutines.md",
     "Rust Notes/Ownership & Borrowing.md",
     "Rust Notes/Rust Atomics and Memory Ordering.md",
     "Distributed-Systems-Cohort/Work Scheduling.md",
