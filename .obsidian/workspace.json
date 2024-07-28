@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Wind-Cache-Library/Requirements.md",
+                "file": "Distributed-Systems-Cohort/Co-routines and GPU.md",
                 "mode": "source",
                 "source": false
               }
@@ -107,7 +107,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Wind-Cache-Library/Requirements.md",
+                "file": "Distributed-Systems-Cohort/Co-routines and GPU.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -124,7 +124,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Wind-Cache-Library/Requirements.md",
+                "file": "Distributed-Systems-Cohort/Co-routines and GPU.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -147,7 +147,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Wind-Cache-Library/Requirements.md"
+                "file": "Distributed-Systems-Cohort/Co-routines and GPU.md"
               }
             }
           }
@@ -172,6 +172,8 @@
   },
   "active": "da4462d75cf75bb0",
   "lastOpenFiles": [
+    "Wind-Cache-Library/Requirements.md",
+    "Distributed-Systems-Cohort/Co-routines and GPU.md",
     "Rust Notes/Ownership & Borrowing.md",
     "Rust Notes/Rust Atomics and Memory Ordering.md",
     "Distributed-Systems-Cohort/Work Scheduling.md",
@@ -186,7 +188,6 @@
     "Architectural Scalability.md",
     "Media/Pasted image 20240714153535.png",
     "Media/Screenshot from 2024-07-14 13-15-29.png",
-    "Wind-Cache-Library/Requirements.md",
     "Distributed-Systems-Cohort",
     "Rust Notes",
     "Wind-Cache-Library",
@@ -206,7 +207,6 @@
     "Wind-Cache-Docs/publish/works-out-of-the-box-with-markdown-files.md",
     "Wind-Cache-Docs/publish/reinventing-the-wheel.md",
     "Wind-Cache-Docs/publish/publish-your-obsidian-notes-with-linked-blog-starter.md",
-    "Wind-Cache-Docs/publish/linked-blog-starter-does-not-reinvent-wheel.md",
     "Wind-Cache-Docs/publish/attachments/vercel-project-id.png",
     "Wind-Cache-Docs/publish/attachments/vercel-create-token.png",
     "Wind-Cache-Docs/publish/attachments/vercel-account-id.png",
