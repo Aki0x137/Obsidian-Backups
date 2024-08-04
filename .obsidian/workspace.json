@@ -13,7 +13,19 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Distributed-Systems-Cohort/Coroutines.md",
+                "file": "Distributed-Systems-Cohort/SAT Solvers - An Introduction and Go Implementation.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "8ab50a6696a42868",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Distributed-Systems-Cohort/SAT Solvers - An Introduction and Go Implementation.md",
                 "mode": "source",
                 "source": false
               }
@@ -41,7 +53,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -107,7 +120,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Distributed-Systems-Cohort/Coroutines.md",
+                "file": "Distributed-Systems-Cohort/SAT Solvers - An Introduction and Go Implementation.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -124,7 +137,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Distributed-Systems-Cohort/Coroutines.md",
+                "file": "Distributed-Systems-Cohort/SAT Solvers - An Introduction and Go Implementation.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -147,7 +160,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Distributed-Systems-Cohort/Coroutines.md"
+                "file": "Distributed-Systems-Cohort/SAT Solvers - An Introduction and Go Implementation.md"
               }
             }
           }
@@ -170,14 +183,16 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "da4462d75cf75bb0",
+  "active": "8ab50a6696a42868",
   "lastOpenFiles": [
-    "Wind-Cache-Library/Requirements.md",
-    "Distributed-Systems-Cohort/Coroutines.md",
-    "Rust Notes/Ownership & Borrowing.md",
-    "Rust Notes/Rust Atomics and Memory Ordering.md",
+    "Distributed-Systems-Cohort/SAT Solvers.md",
     "Distributed-Systems-Cohort/Work Scheduling.md",
     "Distributed-Systems-Cohort/Thinking Concurrency.md",
+    "Distributed-Systems-Cohort/SAT Solvers - An Introduction and Go Implementation.md",
+    "Distributed-Systems-Cohort/Coroutines.md",
+    "Wind-Cache-Library/Requirements.md",
+    "Rust Notes/Ownership & Borrowing.md",
+    "Rust Notes/Rust Atomics and Memory Ordering.md",
     "Distributed-Systems-Cohort/Requirements.md",
     "Distributed-Systems-Cohort/{Draft} Non Blocking Data Structures.md",
     "Excalidraw/Parallel Computation DAG.md",
@@ -205,8 +220,6 @@
     "Wind-Cache-Library",
     "Untitled.canvas",
     "Wind-Cache-Docs/publish/works-out-of-the-box-with-markdown-files.md",
-    "Wind-Cache-Docs/publish/reinventing-the-wheel.md",
-    "Wind-Cache-Docs/publish/publish-your-obsidian-notes-with-linked-blog-starter.md",
     "Wind-Cache-Docs/publish/attachments/vercel-project-id.png",
     "Wind-Cache-Docs/publish/attachments/vercel-create-token.png",
     "Wind-Cache-Docs/publish/attachments/vercel-account-id.png",
