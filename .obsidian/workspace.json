@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Distributed-Systems-Cohort/SAT Solvers - An Introduction and Go Implementation.md",
+                "file": "Distributed-Systems-Cohort/SAT Solvers.md",
                 "mode": "source",
                 "source": false
               }
@@ -120,7 +120,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Distributed-Systems-Cohort/SAT Solvers - An Introduction and Go Implementation.md",
+                "file": "Distributed-Systems-Cohort/SAT Solvers.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -137,7 +137,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Distributed-Systems-Cohort/SAT Solvers - An Introduction and Go Implementation.md",
+                "file": "Distributed-Systems-Cohort/SAT Solvers.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -160,7 +160,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Distributed-Systems-Cohort/SAT Solvers - An Introduction and Go Implementation.md"
+                "file": "Distributed-Systems-Cohort/SAT Solvers.md"
               }
             }
           }
@@ -185,10 +185,10 @@
   },
   "active": "8ab50a6696a42868",
   "lastOpenFiles": [
+    "Distributed-Systems-Cohort/SAT Solvers - An Introduction and Go Implementation.md",
     "Distributed-Systems-Cohort/SAT Solvers.md",
     "Distributed-Systems-Cohort/Work Scheduling.md",
     "Distributed-Systems-Cohort/Thinking Concurrency.md",
-    "Distributed-Systems-Cohort/SAT Solvers - An Introduction and Go Implementation.md",
     "Distributed-Systems-Cohort/Coroutines.md",
     "Wind-Cache-Library/Requirements.md",
     "Rust Notes/Ownership & Borrowing.md",
