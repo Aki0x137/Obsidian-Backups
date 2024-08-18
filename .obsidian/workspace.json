@@ -37,7 +37,19 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Observability and OpenTelemetry/Observability Basics.md",
+                "file": "Wind-Cache-Library/Requirements.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "d1f93cfdb7a9139f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Go Concurrency/Basics.md",
                 "mode": "source",
                 "source": false
               }
@@ -66,7 +78,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -132,7 +144,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Observability and OpenTelemetry/Observability Basics.md",
+                "file": "Go Concurrency/Basics.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -149,7 +161,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Observability and OpenTelemetry/Observability Basics.md",
+                "file": "Go Concurrency/Basics.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -172,7 +184,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Observability and OpenTelemetry/Observability Basics.md"
+                "file": "Go Concurrency/Basics.md"
               }
             }
           }
@@ -195,23 +207,25 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "3844e7af17ba6838",
+  "active": "d1f93cfdb7a9139f",
   "lastOpenFiles": [
-    "Distributed-Systems-Cohort/SAT Solvers.md",
-    "Observability and OpenTelemetry/Observability Basics.md",
-    "Observability and OpenTelemetry",
-    "Distributed-Systems-Cohort/SAT Solvers - An Introduction and Go Implementation.md",
-    "Distributed-Systems-Cohort/Work Scheduling.md",
-    "Distributed-Systems-Cohort/Thinking Concurrency.md",
-    "Distributed-Systems-Cohort/Coroutines.md",
     "Wind-Cache-Library/Requirements.md",
+    "Go Concurrency/Basics.md",
+    "Go Concurrency",
+    "Observability and OpenTelemetry/Observability Basics.md",
+    "Distributed-Systems-Cohort/Work Scheduling.md",
+    "Distributed-Systems-Cohort/SAT Solvers - An Introduction and Go Implementation.md",
+    "Distributed-Systems-Cohort/Coroutines.md",
+    "Distributed-Systems-Cohort/{Draft} Non Blocking Data Structures.md",
+    "Excalidraw/Parallel Computation DAG.md",
+    "Excalidraw/Drawing 2024-07-14 22.10.00.excalidraw.md",
+    "Distributed-Systems-Cohort/SAT Solvers.md",
+    "Observability and OpenTelemetry",
+    "Distributed-Systems-Cohort/Thinking Concurrency.md",
     "Rust Notes/Ownership & Borrowing.md",
     "Rust Notes/Rust Atomics and Memory Ordering.md",
     "Distributed-Systems-Cohort/Requirements.md",
-    "Distributed-Systems-Cohort/{Draft} Non Blocking Data Structures.md",
-    "Excalidraw/Parallel Computation DAG.md",
     "Excalidraw/Parallel computation DAG.md",
-    "Excalidraw/Drawing 2024-07-14 22.10.00.excalidraw.md",
     "Excalidraw",
     "Media",
     "Architectural Scalability.md",
@@ -230,7 +244,6 @@
     "Wind-Cache-Docs/publish/statically-generated.md",
     "My Work.md",
     "Wind-Cache-Library/Steps to create library.md",
-    "Wind-Cache-Library/Welcome.md",
     "Wind-Cache-Library",
     "Untitled.canvas",
     "Wind-Cache-Docs/publish/attachments/vercel-project-id.png",
@@ -242,7 +255,6 @@
     "Wind-Cache-Docs/publish/attachments/fork-linked-blog-starter-md.png",
     "Wind-Cache-Docs/publish/attachments/fn-website-demo.gif",
     "Wind-Cache-Docs/publish/attachments",
-    "Wind-Cache-Docs/publish",
-    "Wind-Cache-Docs"
+    "Wind-Cache-Docs/publish"
   ]
 }
