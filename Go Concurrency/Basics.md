@@ -18,3 +18,11 @@ As we begin moving down the stack of abstraction, the problem of modeling things
 *Do not communicate by sharing memory. Instead, share memory by communicating*.
 
 ![[Pasted image 20240818200222.png]]
+
+> If you find yourself exposing locks beyond a type, this should raise a red flag. Try to keep the locks constrained to a small lexical scope.
+
+> If you find yourself struggling to understand how your concurrent code works, why a deadlock or race is occurring, and you’re using primitives, this is probably a good indicator that you should switch to channels.
+
+> Remember that channels are inherently more composable than memory access synchronization primitives. Having locks scattered throughout your object-graph sounds like a nightmare, but having channels everywhere is expected and encouraged
+
+Go’s philosophy on concurrency can be summed up like this: aim for simplicity, use channels when possible, and treat goroutines like a free resource.
