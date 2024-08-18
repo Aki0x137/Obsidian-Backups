@@ -11,4 +11,10 @@ As we begin moving down the stack of abstraction, the problem of modeling things
 
 > Go introduces goroutines and channels as primary concurrency primitives along with traditional locks. goroutines and channels are not another layer of abstraction on top of OS threads, but they **supplant** them.
 
-Goroutines free us from having to think about our problem space in terms of parallelism and instead allow us to model problems closer to their natural level of concurrency.
+- Goroutines free us from having to think about our problem space in terms of parallelism and instead allow us to model problems closer to their natural level of concurrency. 
+- Channels, for instance, are inherently *composable* with other channels. This makes writing large systems simpler because you can coordinate the input from multiple subsystems by easily composing the output together. Coordinating mutexes is a much more difficult proposition.
+- The `select` statement is the complement to Go’s channels and is what enables all the difficult bits of composing channels. `select` statements allow you to efficiently wait for events, select a message from competing channels in a uniform random way, continue on if there are no messages waiting, and more.
+
+*Do not communicate by sharing memory. Instead, share memory by communicating*.
+
+![[Pasted image 20240818200222.png]]
