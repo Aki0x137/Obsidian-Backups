@@ -16,7 +16,9 @@
                 "file": "Distributed-Systems-Cohort/SAT Solvers - An Introduction and Go Implementation.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "icon": "lucide-file",
+              "title": "SAT Solvers - An Introduction and Go Implementation"
             }
           },
           {
@@ -28,7 +30,9 @@
                 "file": "Distributed-Systems-Cohort/SAT Solvers.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "icon": "lucide-file",
+              "title": "SAT Solvers"
             }
           },
           {
@@ -40,7 +44,9 @@
                 "file": "Wind-Cache-Library/Requirements.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "icon": "lucide-file",
+              "title": "Requirements"
             }
           },
           {
@@ -52,7 +58,37 @@
                 "file": "Go Concurrency/Basics.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "icon": "lucide-file",
+              "title": "Basics"
+            }
+          },
+          {
+            "id": "458a2d93a8d73d20",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Go Concurrency/Channel Ownership & Closing.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Channel Ownership & Closing"
+            }
+          },
+          {
+            "id": "ed5f649ef990f3f0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Go Concurrency/The for-select Loop.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "The for-select Loop"
             }
           },
           {
@@ -62,7 +98,9 @@
               "type": "excalidraw",
               "state": {
                 "file": "Excalidraw/Parallel Computation DAG.md"
-              }
+              },
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           },
           {
@@ -74,11 +112,13 @@
                 "file": "Rust Notes/Rust Atomics and Memory Ordering.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "icon": "lucide-file",
+              "title": "Rust Atomics and Memory Ordering"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -98,7 +138,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
             }
           },
           {
@@ -113,7 +155,9 @@
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-search",
+              "title": "Search"
             }
           },
           {
@@ -121,7 +165,9 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {}
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
             }
           }
         ]
@@ -152,7 +198,9 @@
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Basics"
             }
           },
           {
@@ -164,7 +212,9 @@
                 "file": "Go Concurrency/Basics.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Basics"
             }
           },
           {
@@ -175,7 +225,9 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": true
-              }
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
             }
           },
           {
@@ -185,7 +237,9 @@
               "type": "outline",
               "state": {
                 "file": "Go Concurrency/Basics.md"
-              }
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Basics"
             }
           }
         ],
@@ -207,12 +261,14 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "d1f93cfdb7a9139f",
+  "active": "ed5f649ef990f3f0",
   "lastOpenFiles": [
+    "Go Concurrency/Channel Ownership & Closing.md",
+    "Go Concurrency/The for-select Loop.md",
+    "Go Concurrency/Basics.md",
     "Pasted image 20240818200222.png",
     "Distributed-Systems-Cohort/Thinking Concurrency.md",
     "Distributed-Systems-Cohort/{Draft} Non Blocking Data Structures.md",
-    "Go Concurrency/Basics.md",
     "Wind-Cache-Library/Requirements.md",
     "Go Concurrency",
     "Observability and OpenTelemetry/Observability Basics.md",
@@ -243,7 +299,6 @@
     "Wind-Cache-Docs/publish/accepted-markdown-metadata.md",
     "Wind-Cache-Docs/Steps.md",
     "Wind-Cache-Docs/publish/statically-generated.md",
-    "My Work.md",
     "Wind-Cache-Library",
     "Untitled.canvas",
     "Wind-Cache-Docs/publish/attachments/vercel-project-id.png",
@@ -253,7 +308,6 @@
     "Wind-Cache-Docs/publish/attachments/how-linked-blog-starter-works.png",
     "Wind-Cache-Docs/publish/attachments/github-secrets-vercel.png",
     "Wind-Cache-Docs/publish/attachments/fork-linked-blog-starter-md.png",
-    "Wind-Cache-Docs/publish/attachments/fn-website-demo.gif",
     "Wind-Cache-Docs/publish/attachments",
     "Wind-Cache-Docs/publish"
   ]

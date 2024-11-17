@@ -7,7 +7,7 @@ Concurrency is about structuring code so that different parts can be executed ou
 
 It's possible to have a distinction between concurrency and parallelism, thanks to the layers of abstraction that lie beneath our program’s model: the concurrency primitives, the program’s runtime, the operating system, the platform the operating system runs on(in the case of hypervisors, containers, and virtual machines), and ultimately the CPUs.
 
-As we begin moving down the stack of abstraction, the problem of modeling things concurrently is becomes both more difficult to reason about, and more important.
+As we begin moving down the stack of abstraction, the problem of modelling things concurrently is becomes both more difficult to reason about, and more important.
 
 > Go introduces goroutines and channels as primary concurrency primitives along with traditional locks. goroutines and channels are not another layer of abstraction on top of OS threads, but they **supplant** them.
 
