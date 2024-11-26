@@ -94,9 +94,9 @@ func gen(min, max int, createNumber chan int, end chan bool) {
         }
     }
 }
-
 ```
 
+You can consider the third branch of the `select` statement as a clever `default` branch. This happens because `time.After()` waits for the specified duration (`4 * time.Second`) to elapse and then prints a message and properly ends `gen()` with `return`. This unblocks the `select` statement in case all of the other channels are blocked for some reason
 ###### Sending iteration variables out on a channel:
 Oftentimes you’ll want to convert something that can be iterated over into values on a channel. This is nothing fancy, and usually looks something like this:
 ```go
