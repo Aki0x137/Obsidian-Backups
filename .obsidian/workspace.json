@@ -97,24 +97,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tempo/Work Notes.md",
+                "file": "Go Concurrency/The `select` statement.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Work Notes"
+              "title": "The `select` statement"
             }
           },
           {
             "id": "fb37abfa16247458",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "markdown",
               "state": {
-                "file": "Excalidraw/Parallel Computation DAG.md"
+                "file": "Go Concurrency/The `select` statement.md",
+                "mode": "source",
+                "source": false
               },
               "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "title": "The `select` statement"
             }
           },
           {
@@ -132,7 +134,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -275,9 +277,12 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "01aa52feaf57f1ed",
+  "active": "fb37abfa16247458",
   "lastOpenFiles": [
-    "Go Concurrency/The for-select Loop.md",
+    "Rust Notes/Rust Atomics and Memory Ordering.md",
+    "Go Concurrency/The `select` statement.md",
+    "Excalidraw/Parallel Computation DAG.md",
+    "Distributed-Systems-Cohort/SAT Solvers - An Introduction and Go Implementation.md",
     "Tempo/Work Notes.md",
     "Tempo",
     "Go Concurrency/Channel Ownership & Closing.md",
@@ -289,14 +294,11 @@
     "Go Concurrency",
     "Observability and OpenTelemetry/Observability Basics.md",
     "Distributed-Systems-Cohort/Work Scheduling.md",
-    "Distributed-Systems-Cohort/SAT Solvers - An Introduction and Go Implementation.md",
     "Distributed-Systems-Cohort/Coroutines.md",
-    "Excalidraw/Parallel Computation DAG.md",
     "Excalidraw/Drawing 2024-07-14 22.10.00.excalidraw.md",
     "Distributed-Systems-Cohort/SAT Solvers.md",
     "Observability and OpenTelemetry",
     "Rust Notes/Ownership & Borrowing.md",
-    "Rust Notes/Rust Atomics and Memory Ordering.md",
     "Distributed-Systems-Cohort/Requirements.md",
     "Excalidraw/Parallel computation DAG.md",
     "Excalidraw",
