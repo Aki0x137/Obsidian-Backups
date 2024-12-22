@@ -28,7 +28,7 @@ The trading exchange maintains a book of client buy orders (bids) and client ask
 
 Market data feed handlers on the client side decode the incoming market data feed and build a limit order book on their side to reflect the state of the order book as the exchange sees it. This is then propagated through the client's trading algorithm and then goes through the order entry gateway to generate an outgoing order flow. The outgoing order flow is communicated to the exchange via order entry protocols. This, in turn, will generate further market data flow, and so the trading information cycle continues.
 
-## Exchange 
+## Exchange and Order Book
 The exchange order book maintains all incoming buy and sell orders placed by clients. It tracks all attributes for incoming orders—prices, number of contracts/shares, order types, and participant identification.
 Market participants are allowed to place new orders, cancel existing orders, or modify order attributes such as price and the number of shares/contracts, and the exchange generates public market data in response to each order sent by participants
 
@@ -134,3 +134,36 @@ It is a fundamental rule in most order-driven financial markets that governs how
     
     - Traders submitting orders at competitive prices are more likely to get matched.
     - Traders with less competitive prices may need to wait or adjust their price to secure a match.
+
+## **Pro-rata matching** 
+It is a method of order matching used in financial markets, particularly in derivatives and commodities trading, where orders are matched based on their size (quantity) rather than the time they were entered. This method allocates trades proportionally among competing orders at the same price level.
+
+---
+
+### **How Pro-rata Matching Works**
+
+1. **Order Priority**:
+    
+    - In pro-rata matching, orders at the same price level are matched proportionally to their order size.
+    - Larger orders receive a larger share of the available quantity, while smaller orders get a smaller share.
+2. **Allocation Process**:
+    
+    - All orders at the same price level are combined.
+    - The total available quantity to be matched is distributed among these orders in proportion to their size.
+    - If the available quantity cannot be divided evenly, the system may round off allocations, sometimes using a random process to handle the remainder.
+
+# Limit order book
+
+A limit order book is very similar in spirit to the exchange order book. The only difference is that this is built by the market participants based on the market data that is being sent out by the exchange in response to market participants sending orders to it.
+
+# Market data feed handlers
+
+Market data feed handlers are software applications that market participants build with a view to interfacing with the specific exchange market data protocol. These are able to subscribe, receive, decode, and check for errors and network losses, and are designed with latency, throughput, error tolerance, redundancy, and many other requirements in mind.
+
+# Order Types
+## IOC – Immediate Or Cancel
+These orders never get added to the book. They either match against existing resting orders to a maximum of the IOC order size, or the rest of the incoming order gets cancelled. If no resting order is available at a price that the IOC can match against, then the IOC is cancelled in its entirety. IOC orders have the benefit of not resting in the book post matching and causing additional complexity with order management in trading algorithms.
+## GTD – Good Till Day
+These orders get added to the book. If they match fully against existing resting orders in the book, then they don't get added, otherwise the remaining quantity on the order (which can be the entire original quantity if there's no partial match) gets added to the book and sits as resting orders that the incoming aggressors can match against. The benefits of GTD orders are that they can take advantage of FIFO matching algorithms by having better priorities than orders that just showed up in the book, but require more complex order management in trading algorithms.
+## Stop orders
+Stop orders are orders that aren't in the book until a specific price (called the stop price) is traded in the market, at which point they become regular GTD orders at a pre-specified price. These orders are great as exit orders (either to liquidate a losing position or to realize profit on a winning position). We will revisit these orders after we have explained what having a losing or winning position means and what exiting a position means.
