@@ -42,3 +42,95 @@ When incoming bids are **at or above the best (lowest price) ask orders**, then 
 Conversely, when incoming asks are **at or below the best (highest price) bid orders**, then a match occurs.
 
 > This will be important later on when we discuss how sophisticated trading algorithms use speed and intelligence to get higher priorities for their orders and how this impacts profitability.
+
+Matching Process with example:
+
+1. **Key Terms:**
+    
+    - **Aggressive Orders:** These are orders that are willing to trade immediately at the best available price in the market. They "take" liquidity from the order book. For example, a market order is an aggressive order because it matches with existing orders rather than waiting.
+    - **Passive Orders:** These are resting orders already in the order book. They "provide" liquidity and are waiting to be matched with incoming orders.
+    - **Limit Price:** This is the maximum price the buyer is willing to pay or the minimum price the seller is willing to accept. It serves as a boundary beyond which a match cannot occur.
+2. **Matching Process:**
+    
+    - When an aggressive order arrives, it starts to match with the best available passive orders on the opposite side of the book (buy orders match with sell orders and vice versa).
+    - Matching happens at prices that are favorable to the aggressive order. For instance, if it’s a buy order, it matches with the lowest-priced sell orders first (because those are the best deals for the buyer).
+    - This process continues as long as the prices of the remaining passive orders are within the limit price of the aggressive order.
+3. **Two Possible Outcomes:**
+    
+    - **Case 1: The Aggressive Order Is Fully Matched.**
+        - If the quantity of the aggressive order is smaller than or equal to the available quantity of matching passive orders, the entire aggressive order is matched. For example:
+            - A buyer aggressively submits an order to buy 100 shares at a limit price of $50.
+            - The order book has sell orders at $48 (50 shares) and $49 (50 shares).
+            - The aggressive buy order is fully matched, buying 50 shares at $48 and 50 shares at $49.
+    - **Case 2: The Remaining Passive Orders Have Prices Worse Than the Limit Price of the Aggressive Order.**
+        - If the remaining passive orders in the book are priced outside the limit price of the aggressive order, no further match can occur.
+        - For instance:
+            - A buyer aggressively submits an order to buy 100 shares at a limit price of $50.
+            - The order book has sell orders at $48 (50 shares), $49 (30 shares), and $51 (20 shares).
+            - The buy order matches with the 50 shares at $48 and 30 shares at $49.
+            - However, the remaining 20 shares priced at $51 are higher than the buyer's limit of $50, so no match occurs for those shares. The unmatched part of the buy order (20 shares) remains unexecuted or gets cancelled if it was a market order.
+4. **The Fundamental Rule:**
+    
+    - An order cannot be matched at a price worse than the limit price it was entered at. This ensures that traders are only matched at prices they are comfortable with.
+    - For buyers, this means they will not pay more than their limit price.
+    - For sellers, this means they will not sell for less than their limit price.
+
+This process guarantees fairness and price priority in the order book, ensuring that orders are executed within the boundaries set by the traders who placed them.
+
+## **Price-Time Priority** (FIFO)
+It is a fundamental rule in most order-driven financial markets that governs how orders are matched in the order book. It ensures fairness by prioritizing orders based on two factors: **price** and, when prices are the same, **time of entry**. Here’s a detailed explanation:
+
+---
+
+### **1. Price Priority** (Primary Priority)
+
+- **Definition**: Orders are prioritized based on their price, with better prices taking precedence.
+    
+    - **For Buy Orders**: Higher prices are better. A buy order with a higher price will be matched before one with a lower price.
+    - **For Sell Orders**: Lower prices are better. A sell order with a lower price will be matched before one with a higher price.
+- **Example**: Suppose the order book looks like this:
+    
+    - **Buy Side**:
+        
+        - $100 (50 shares)
+        - $99 (30 shares)
+    - **Sell Side**:
+        
+        - $101 (20 shares)
+        - $102 (40 shares)
+    - If a sell order arrives to sell 20 shares at $100, it will first match with the **buy order at $100**, because $100 is the best price for the seller (highest buy price available).
+        
+
+---
+
+### **2. Time Priority** (Secondary Priority)
+
+- **Definition**: If two or more orders are at the same price, the order that was entered first is given priority.
+    
+    - This ensures fairness by rewarding traders who submitted their orders earlier.
+    - Orders at the same price are executed in the order they were entered into the book.
+- **Example**: Suppose the order book contains the following buy orders:
+    
+    - **Buy Orders**:
+        - $100 (50 shares, entered at 10:00 AM)
+        - $100 (30 shares, entered at 10:01 AM)
+    - If a sell order arrives to sell 60 shares at $100, the system will match:
+        - First 50 shares with the order entered at **10:00 AM**.
+        - The remaining 10 shares with the order entered at **10:01 AM**.
+
+---
+
+### **Why Price-Time Priority Matters**
+
+1. **Fairness and Transparency**:
+    
+    - The system ensures that the best price is always executed first.
+    - Traders who act earlier at the same price level are rewarded, encouraging quick decision-making.
+2. **Efficient Markets**:
+    
+    - Encourages liquidity by incentivizing traders to post competitive prices to get their orders executed sooner.
+    - Ensures that orders flow through the book systematically without arbitrary prioritization.
+3. **Practical Implications**:
+    
+    - Traders submitting orders at competitive prices are more likely to get matched.
+    - Traders with less competitive prices may need to wait or adjust their price to secure a match.
