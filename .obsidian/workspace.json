@@ -266,14 +266,14 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Go Concurrency/Basics.md"
+                "file": "Algorithmic Trading/Basics.md"
               },
               "icon": "lucide-list",
               "title": "Outline of Basics"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",

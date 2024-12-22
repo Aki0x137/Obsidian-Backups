@@ -11,7 +11,7 @@ The speed at which participants receive information, the speed at which they rea
 Market sectors are the different kinds of underlying products that can be traded. The most popular market sectors are commodities (metals, agricultural produce), energy (oil, gas), equities (stocks of different companies), interest rate bonds (coupons you get in exchange for debt, which accrues interest, hence the name), and foreign exchange (cash exchange rates between currencies for different countries)
 
 # Asset Class
-Asset classes are the different kinds of actual vehicles that are available for trading at different exchanges. For example, cash interest rate bonds, cash foreign exchange, and cash stock shares are what we described in the previous section, but we can have financial instruments that are derivatives of these underlying products. Derivatives are instruments that are built on top of other instruments and have some additional constraints. The two most popular derivatives are futures and options, and are heavily traded across all derivatives electronic exchanges.
+Asset classes are the different kinds of actual vehicles that are available for trading at different exchanges. For example, **cash interest rate bonds**, **cash foreign exchange**, and **cash stock** shares are what we described in the previous section, but we can have financial instruments that are derivatives of these underlying products. Derivatives are instruments that are built on top of other instruments and have some additional constraints. The two most popular derivatives are futures and options, and are heavily traded across all derivatives electronic exchanges.
 
 A **call option**, is the right to buy, but not an obligation to buy at expiration
 - If the price of the underlying product increases prior to expiration because now, such a party can exercise their option at expiration and buy the underlying product at a price lower than the current market price, and make profit.
@@ -20,3 +20,16 @@ A **call option**, is the right to buy, but not an obligation to buy at expirati
 A **put option**, is the right to sell, but not an obligation to sell at expiration
 - If the price of the underlying product decreases prior to expiration, the holder of the put option can exercise their option at expiration and sell the underlying product at a price higher than the current market price, making a profit.
 - Conversely, if the price of the underlying product increases prior to expiration, the holder of the put option has the option to back out of exercising it, thereby only losing the premium they paid for the option.
+
+## Market Trade Cycle
+The trading exchange maintains a book of client buy orders (bids) and client ask orders (asks), and publishes market data using market data protocols to provide the state of the book to all market participants. 
+**Bids**: client buy orders 
+**Asks**: client ask orders
+Market data feed handlers on the client side decode the incoming market data feed and build a limit order book on their side to reflect the state of the order book as the exchange sees it. This is then propagated through the client's trading algorithm and then goes through the order entry gateway to generate an outgoing order flow. The outgoing order flow is communicated to the exchange via order entry protocols. This, in turn, will generate further market data flow, and so the trading information cycle continues.
+
+## Exchange 
+
+
+> This will be important later on when we discuss how sophisticated trading algorithms use speed and intelligence to get higher priorities for their orders and how this impacts profitability.
+
+Market participants are allowed to place new orders, cancel existing orders, or modify order attributes such as price and the number of shares/contracts, and the exchange generates public market data in response to each order sent by participants
