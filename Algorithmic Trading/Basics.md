@@ -25,11 +25,20 @@ A **put option**, is the right to sell, but not an obligation to sell at expirat
 The trading exchange maintains a book of client buy orders (bids) and client ask orders (asks), and publishes market data using market data protocols to provide the state of the book to all market participants. 
 **Bids**: client buy orders 
 **Asks**: client ask orders
+
 Market data feed handlers on the client side decode the incoming market data feed and build a limit order book on their side to reflect the state of the order book as the exchange sees it. This is then propagated through the client's trading algorithm and then goes through the order entry gateway to generate an outgoing order flow. The outgoing order flow is communicated to the exchange via order entry protocols. This, in turn, will generate further market data flow, and so the trading information cycle continues.
 
 ## Exchange 
+The exchange order book maintains all incoming buy and sell orders placed by clients. It tracks all attributes for incoming orders—prices, number of contracts/shares, order types, and participant identification.
+Market participants are allowed to place new orders, cancel existing orders, or modify order attributes such as price and the number of shares/contracts, and the exchange generates public market data in response to each order sent by participants
 
+## Matching Algorithm
+- Bids are sorted from the highest price (best price) to the lowest price (worst price). Bids with higher prices have a higher priority as far as matching is concerned.
+- Asks are sorted from the lowest price (best price) to the highest price (worst price). Asks with lower prices have a higher priority.
+- Bids (or Asks) at the same price are prioritized depending on the matching algorithm. The simplest FIFO (First In First Out) algorithm uses the intuitive rule of prioritizing orders at the same price in the order in which they came in. 
+- As regards asks at the same price, the matching prioritization method depends on the matching algorithm adopted by the exchange for the specific product.
+
+When incoming bids are **at or above the best (lowest price) ask orders**, then a match occurs.
+Conversely, when incoming asks are **at or below the best (highest price) bid orders**, then a match occurs.
 
 > This will be important later on when we discuss how sophisticated trading algorithms use speed and intelligence to get higher priorities for their orders and how this impacts profitability.
-
-Market participants are allowed to place new orders, cancel existing orders, or modify order attributes such as price and the number of shares/contracts, and the exchange generates public market data in response to each order sent by participants
