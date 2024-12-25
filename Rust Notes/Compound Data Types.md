@@ -315,7 +315,6 @@ let tuple = (42, String::from("hello"), true);
 println!("{}", tuple.0);  // 42
 println!("{}", tuple.1);  // "hello"
 ```
-
 ## Pattern Matching and Destructuring
 ```rust
 // Destructuring
@@ -331,5 +330,68 @@ match tuple {
     _ => println!("No match"),
 }
 ```
-
 ## Unit Type (Empty Tuple)
+```rust
+// Unit type is an empty tuple
+let unit: () = ();
+
+// Common in functions that don't return values
+fn do_something() -> () {
+    // Function body
+}
+
+// Equivalent to
+fn do_something() {
+    // Function body
+}
+```
+## Tuple Structs
+```rust
+// Named tuples without named fields
+struct Point(i32, i32);
+struct Color(u8, u8, u8);
+
+let point = Point(10, 20);
+let color = Color(255, 0, 0);
+
+// Accessing fields
+println!("x: {}", point.0);
+println!("red: {}", color.0);
+```
+## Common Use Cases
+1. Returning multiple values:
+```rust
+fn divide(dividend: i32, divisor: i32) -> (i32, i32) {
+    let quotient = dividend / divisor;
+    let remainder = dividend % divisor;
+    (quotient, remainder)
+}
+
+let (quot, rem) = divide(10, 3);
+```
+2. Temporary grouping:
+```rust
+fn process_coordinates() {
+    let coordinates = vec![(0, 1), (2, 3), (4, 5)];
+    
+    for (x, y) in coordinates {
+        println!("Point at ({}, {})", x, y);
+    }
+}
+```
+3. Simple key-value pairs:
+```rust
+let pairs = vec![
+    ("name", "Alice"),
+    ("age", "30"),
+    ("city", "London")
+];
+```
+## Working with References
+```rust
+// Tuple of references
+let tuple: (&str, &i32) = ("hello", &42);
+
+// Reference to tuple
+let tuple_ref: &(String, i32) = &(String::from("hello"), 42);
+```
