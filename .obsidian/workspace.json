@@ -154,7 +154,7 @@
               "type": "markdown",
               "state": {
                 "file": "Rust Notes/Compound Data Types.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
@@ -280,10 +280,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Algorithmic Trading/Basics.md"
+                "file": "Rust Notes/Compound Data Types.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Basics"
+              "title": "Outline of Compound Data Types"
             }
           }
         ],
@@ -291,8 +291,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
