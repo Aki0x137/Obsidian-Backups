@@ -302,3 +302,34 @@ for x in &vec {
     - Need to own a variable-sized collection
     - Building data structures
     - Working with dynamic content
+# Tuples
+A tuple is a fixed-size ordered collection that can hold multiple values of different types.
+```rust
+// Basic tuple
+let tuple: (i32, String, bool) = (42, String::from("hello"), true);
+
+// Type annotation is optional due to inference
+let tuple = (42, String::from("hello"), true);
+
+// Accessing elements using dot notation
+println!("{}", tuple.0);  // 42
+println!("{}", tuple.1);  // "hello"
+```
+
+## Pattern Matching and Destructuring
+```rust
+// Destructuring
+let (number, text, flag) = tuple;
+
+// Partial destructuring with _
+let (number, _, flag) = tuple;
+
+// In match expressions
+match tuple {
+    (42, _, true) => println!("Found specific pattern"),
+    (x, _, _) if x > 50 => println!("Large number"),
+    _ => println!("No match"),
+}
+```
+
+## Unit Type (Empty Tuple)
