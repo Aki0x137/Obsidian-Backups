@@ -154,7 +154,7 @@
               "type": "markdown",
               "state": {
                 "file": "Rust Notes/Compound Data Types.md",
-                "mode": "preview",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
@@ -291,7 +291,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
