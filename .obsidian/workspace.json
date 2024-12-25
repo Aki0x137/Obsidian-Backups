@@ -125,12 +125,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Algorithmic Trading/Basics.md",
+                "file": "Rust Notes/Ownership & Borrowing.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Basics"
+              "title": "Ownership & Borrowing"
             }
           },
           {
@@ -293,8 +293,8 @@
   },
   "active": "32bd44d0ae46fab2",
   "lastOpenFiles": [
-    "Go Concurrency/The `select` statement.md",
     "Algorithmic Trading/Basics.md",
+    "Go Concurrency/The `select` statement.md",
     "Algorithmic Trading",
     "Rust Notes/Rust Atomics and Memory Ordering.md",
     "Excalidraw/Parallel Computation DAG.md",
