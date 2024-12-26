@@ -102,3 +102,58 @@ fn main() {
     }
 }
 ```
+
+# Loop Control Flow
+## **1. `break`**
+Exits the loop immediately.
+```rust
+fn main() {
+    for i in 1..10 {
+        if i == 5 {
+            break; // Exit the loop when i is 5
+        }
+        println!("Value: {}", i);
+    }
+}
+```
+## **2. `continue`**
+Skips the current iteration and moves to the next one.
+```rust
+fn main() {
+    for i in 1..10 {
+        if i % 2 == 0 {
+            continue; // Skip even numbers
+        }
+        println!("Odd Value: {}", i);
+    }
+}
+```
+### 3. Labels with `break` and `continue`
+Labels help manage nested loops, allowing you to specify which loop to `break` or `continue`.
+```rust
+fn main() {
+    'outer: for i in 1..5 {
+        for j in 1..5 {
+            if i == 3 {
+                break 'outer; // Break the outer loop
+            }
+            println!("i: {}, j: {}", i, j);
+        }
+    }
+}
+```
+
+| Loop Type | Use Case                                                               |
+| --------- | ---------------------------------------------------------------------- |
+| `loop`    | Infinite or custom-controlled loops (e.g., event listeners, servers).  |
+| `while`   | Dynamic conditions where the number of iterations isn't known upfront. |
+| `for`     | Iterating over collections, ranges, or iterators.                      |
+## **Performance and Best Practices**
+1. **Prefer `for` Loops**:
+    - Rust's `for` loops are idiomatic and leverage iterators for safe and efficient iteration.
+2. **Avoid Infinite Loops When Possible**:
+    - Use `loop` only when absolutely necessary, and ensure you have an explicit exit condition.
+3. **Minimize `while` for Known Iterations**:
+    - Replace `while` with `for` when the number of iterations is predetermined (e.g., ranges).
+4. **Iterator Combinators**:
+    - Use iterator combinators like `map`, `filter`, and `take_while` for concise and expressive loop alternatives.
