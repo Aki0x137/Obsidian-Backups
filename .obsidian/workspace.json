@@ -167,12 +167,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Rust Notes/Compound Data Types.md",
+                "file": "Rust Notes/Ownership & Borrowing.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Compound Data Types"
+              "title": "Ownership & Borrowing"
             }
           }
         ],
@@ -322,8 +322,8 @@
   "active": "4bd1dbcdc7b01600",
   "lastOpenFiles": [
     "Rust Notes/Control Flow.md",
-    "Rust Notes/Functions and Blocks.md",
     "Rust Notes/Compound Data Types.md",
+    "Rust Notes/Functions and Blocks.md",
     "Rust Notes/Rust Atomics and Memory Ordering.md",
     "Rust Notes/Ownership & Borrowing.md",
     "Algorithmic Trading/Basics.md",
