@@ -1,9 +1,10 @@
 # Ownership
 
  - Deals with how a memory reference is managed in a program.
- - Any program when executing, stores data in two different parts of computer memory with different guarantees:
+ - Any program when executing, stores data in two different regions of computer volatile memory with different guarantees:
 	 - **Stack**: Stores local variables, that have scope limited to a function execution or block, and whose size is known during compile time.
 	 - **Heap**: Stores global variables or values that need to be in existence till the end of program, or whose size is dynamic.
+	 - **Static**: Stores binary instructions of program and static variables.
  - In any program, written in Rust or any other language, a variable that stores data with a **known** and **fixed** size is stored in stack. For example `let x: i32 = 5;` will take 32 bits of memory in our program. Here, both the variable and the value, will be stored in stack.
 
 > [!NOTE] Stack vs Heap
@@ -66,7 +67,7 @@ fn main() {
 ```
 
 - When we pass, a value to function(in the above code `say` to `print_out`), we transfer ownership to that function.
-- Once we transfer ownership, the value is out of scope, in the callee.
+- Once we transfer ownership, the value is out of scope, in the caller.
 - If we try to access the value of the transferred/moved, we get error, since the value is no longer **valid**.
 
 - But we do need to pass values around functions. To do that, we need to tell the compiler, how exactly the value will be used.
