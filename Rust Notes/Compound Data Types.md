@@ -514,3 +514,189 @@ for (i, val) in v.iter().enumerate() {
 - Nested tuples and guards allow complex and precise matching.
 - Use `if let` when you care about a single pattern.
 # Struct
+**structs** are custom data types that allow you to group related data together. It is a collection of named fields, each with its own type.
+```rust
+struct User {
+    name: String,
+    age: u32,
+    email: String,
+}
+
+fn main() {
+    let user = User {
+        name: String::from("Alice"),
+        age: 30,
+        email: String::from("alice@example.com"),
+    };
+
+    println!("Name: {}, Age: {}", user.name, user.age);
+}
+```
+## **1. `impl` Blocks**
+An `impl` block is where you define methods and associated functions for a struct, enum, or trait. It binds specific behavior to the type.
+**Syntax**:
+```rust
+impl TypeName {
+    // Methods and associated functions go here
+}
+```
+**Example**:
+```rust
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+}
+```
+Here, the `impl` block binds the `area` function to the `Rectangle` struct, making it a **method**.
+## **2. Methods**
+Methods are functions defined in an `impl` block and are associated with a particular type. They take a **reference to `self`** as their first parameter, representing an instance of the type.
+### Types of Methods:
+1. **Immutable Methods (`&self`)**: Used when the method doesn't modify the instance.
+2. **Mutable Methods (`&mut self`)**: Used when the method modifies the instance.
+3. **Ownership Methods (`self`)**: Consumes the instance and takes ownership.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### **Partial Move**
+A **partial move** occurs when only certain fields of a struct are moved out (ownership is transferred), leaving the remaining fields valid.
+```rust
+struct User {
+    name: String,
+    age: u32,
+}
+
+fn main() {
+    let user = User {
+        name: String::from("Alice"),
+        age: 30,
+    };
+
+    let name = user.name; // Moves the `name` field out of `user`
+
+    // Accessing `user.age` is still valid because it wasn't moved.
+    println!("Age: {}", user.age);
+
+    // Attempting to access `user.name` here would result in a compile-time error
+    // because its ownership has been moved.
+}
+```
+### **Rules of Partial Move**
+1. **Ownership Transfer**:
+    - When a field of a struct is moved, the original struct loses ownership of that field.
+    - The remaining fields of the struct remain valid if they are not moved or borrowed.
+2. **Field-by-Field Validity**:
+    - Each field in a struct is treated independently for ownership and borrowing.
+3. **Cannot Use Struct After Full Move**:
+    - If all fields of a struct are moved, the original struct becomes invalid.
+```rust
+struct User {
+    name: String,
+    age: u32,
+}
+
+fn main() {
+    let user = User {
+        name: String::from("Alice"),
+        age: 30,
+    };
+
+    let name = user.name; // `name` is moved
+    let age = user.age;   // `age` is moved
+
+    // Now `user` is no longer valid as all fields are moved.
+    // println!("{:?}", user); // Compile-time error
+}
+```
+### **Borrowing and Partial Move**
+If you borrow one field of a struct, you cannot move or mutably borrow another field at the same time.
+#### Example of Borrowing and Partial Move Conflict:
+```rust
+struct User {
+    name: String,
+    age: u32,
+}
+
+fn main() {
+    let user = User {
+        name: String::from("Alice"),
+        age: 30,
+    };
+
+    let name_ref = &user.name; // Borrowing `user.name`
+    // let name = user.name;   // Error: Cannot move `user.name` while it's borrowed
+
+    println!("Name: {}", name_ref);
+}
+```
+### **Using `PartialEq` and `Clone` with Structs**
+In some cases, you might want to prevent partial moves by deriving traits like `Clone` or `Copy`, enabling cloning instead of moving.
+#### Example Using `Clone`:
+```rust
+#[derive(Clone)]
+struct User {
+    name: String,
+    age: u32,
+}
+
+fn main() {
+    let user = User {
+        name: String::from("Alice"),
+        age: 30,
+    };
+
+    let name = user.name.clone(); // Cloning instead of moving
+    println!("Name: {}", name);
+
+    // The original struct is still valid
+    println!("Age: {}", user.age);
+}
+```
+### **Avoiding Partial Moves Using References**
+To avoid moving fields, you can use **references** instead of transferring ownership.
+#### Example:
+```rust
+struct User {
+    name: String,
+    age: u32,
+}
+
+fn main() {
+    let user = User {
+        name: String::from("Alice"),
+        age: 30,
+    };
+
+    let name_ref = &user.name; // Borrow a reference to `name`
+    println!("Name: {}", name_ref);
+
+    // Both `user` and `user.name` are still accessible
+    println!("Age: {}", user.age);
+}
+```
+### **Practical Use Cases for Partial Move**
+1. **Efficient Ownership Transfer**:
+    - Transfer ownership of expensive fields (e.g., `String`, `Vec`) to avoid copying.
+2. **Selective Field Processing**:
+    - Process certain fields of a struct without invalidating the whole struct.
+3. **Immutable Data Access**:
+    - Leave some fields valid for read-only access after moving others.
+## **Summary**
+- A **partial move** allows ownership of individual fields of a struct to be transferred while leaving the remaining fields valid.
+- Rust's borrow checker ensures you can't access moved fields or violate borrowing rules.

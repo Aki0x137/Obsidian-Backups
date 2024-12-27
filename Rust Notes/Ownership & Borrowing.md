@@ -525,7 +525,45 @@ fn main() {
 #### Rules:
 - Dereferencing raw pointers requires an `unsafe` block.
 - Use with extreme care to avoid invalid memory access or undefined behavior.
+## **4. Deref Coercion**
+Rust performs **deref coercion** automatically to make smart pointers behave like references. This happens when a smart pointer is used in a context where a reference is expected.
+### Example:
+```rust
+use std::ops::Deref;
 
+struct MyBox<T>(T);
+
+impl<T> Deref for MyBox<T> {
+    type Target = T;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+fn hello(name: &str) {
+    println!("Hello, {}!", name);
+}
+
+fn main() {
+    let name = MyBox(String::from("Rust"));
+
+    hello(&name); // Deref coercion: MyBox<String> -> &String -> &str
+}
+```
+## **5. Safety Rules**
+### **Immutable Dereferencing**
+- Always safe because the data cannot be modified.
+- Multiple immutable de-references are allowed.
+### **Mutable Dereferencing**
+- Safe only if no other references (mutable or immutable) exist to the same value.
+- Rust’s borrow checker enforces this at compile time.
+### **Raw Pointers**
+- Dereferencing requires `unsafe` because Rust cannot validate memory safety.
+- Use when interacting with low-level C APIs or doing manual memory management.
+
+---
+## Summary of Rules
 
 | **Reference Type** | **Dereferencing Allowed** | **Safety** | **Key Rule**                               |
 | ------------------ | ------------------------- | ---------- | ------------------------------------------ |
