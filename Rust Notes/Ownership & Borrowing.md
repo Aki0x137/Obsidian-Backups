@@ -146,6 +146,20 @@ fn main() {
 }
 ```
 
+The below code will not compile because, `some_vec` 's `&mut self` reference is passed in `push` while an immutable reference is still in scope and passed to `println` and `get_first_element`.
+```rust
+fn main() {
+	let mut some_vec = vec![1, 2, 3];
+	let first = get_first_element(&some_vec);
+	some_vec.push(4);
+	println!("The first number is: {}", first);
+}
+
+fn get_first_element(num_vec: &Vec<i32>) -> &i32 {
+	&num_vec[0]
+}
+```
+
 ## Special Cases
 ### **Borrowing and Mutability**
 Even if a value is mutable, an immutable reference can still be created as long as there are no active mutable references.
@@ -173,6 +187,7 @@ fn main() {
 ```
 
 
+# Dereferencing
 
 
 // More notes from Doug Milford video
