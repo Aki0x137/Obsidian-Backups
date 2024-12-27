@@ -185,9 +185,25 @@ fn main() {
     println!("{}", r2);
 }
 ```
-
-
 # Dereferencing
 
+
+
+
+Mutable reference(`& mut`) cannot be copied, but can only be moved.
+- References reside in stack.
+- Stack allocated data, when assigned to a new variable, are copied and assigned to new variable. The ownership is not moved.
+- However, mutable references, which themselves are stored on stack, is an exception.
+- This is done to ensure conformity with Rust borrowing rule.
+	- According to the rules of borrowing discussed above, we cannot have multiple mutable references.
+example:
+```rust
+let mut heap_data = vec![5, 6, 7];
+let ref_1 = &mut heap_data;
+
+let move_ref_out = ref1; // mutable reference `move`d to move_ref_out. ref_1 will no longer be valid
+let move_ref_again = ref_1; // error out, trying to create another mutable ref from ref_1 when it longer is valid.
+```
+> The above code would have worked if all of them were immutable references. Also, immutable references are copied and not moved, so ref_1 would still hold a reference.
 
 // More notes from Doug Milford video
