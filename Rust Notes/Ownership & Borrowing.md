@@ -102,12 +102,17 @@ fn main() {
 ```
 
 - When we pass by reference, we say the called function is **borrowing** the value.
-
+**Borrowing** is:
+- Establishing a reference to some data in memory
+	- it is like pointers with added rules
+	- it does **not** take ownership
 > [!info]  Rules of Borrowing:
 > 1. At any given time, You can have either:
 > 	- one mutable reference, or
 > 	- any number of immutable references.
 > 2. References must always be valid.
+
+These rules solve the problem of **data races** and **dandling references**.
 
 - References by default are immutable, but can be made mutable using `mut` keyword.
 - Example:
