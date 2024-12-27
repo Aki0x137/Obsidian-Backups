@@ -185,11 +185,6 @@ fn main() {
     println!("{}", r2);
 }
 ```
-# Dereferencing
-
-
-
-
 Mutable reference(`& mut`) cannot be copied, but can only be moved.
 - References reside in stack.
 - Stack allocated data, when assigned to a new variable, are copied and assigned to new variable. The ownership is not moved.
@@ -205,5 +200,225 @@ let move_ref_out = ref1; // mutable reference `move`d to move_ref_out. ref_1 wil
 let move_ref_again = ref_1; // error out, trying to create another mutable ref from ref_1 when it longer is valid.
 ```
 > The above code would have worked if all of them were immutable references. Also, immutable references are copied and not moved, so ref_1 would still hold a reference.
+# `&mut self` and `&self` 
+In Rust, the usage of `&self`, `&mut self`, and their relationship with references revolves around **ownership**, **borrowing**, and **mutability** when implementing methods for structs or enums. Let’s delve into their meanings and nuances.
+## `&self` and `&mut self` in Method Definitions
+### **1. `&self`: Immutable Borrow**
+- When a method takes `&self`, it borrows the instance of the type immutably.
+- This means the method can **read** but not **modify** the instance.
+```rust
+struct Point {
+    x: i32,
+    y: i32,
+}
 
-// More notes from Doug Milford video
+impl Point {
+    // Method with an immutable borrow
+    fn get_coordinates(&self) -> (i32, i32) {
+        (self.x, self.y) // Can access fields but cannot modify them
+    }
+}
+
+fn main() {
+    let p = Point { x: 3, y: 5 };
+    let coords = p.get_coordinates(); // p is immutably borrowed
+    println!("Coordinates: {:?}", coords); // p is still valid here
+}
+```
+### **2. `&mut self`: Mutable Borrow**
+- When a method takes `&mut self`, it borrows the instance **mutably**.
+- This allows the method to both **read** and **modify** the instance.
+```rust
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+impl Point {
+    // Method with a mutable borrow
+    fn move_by(&mut self, dx: i32, dy: i32) {
+        self.x += dx;
+        self.y += dy; // Modifying the instance
+    }
+}
+
+fn main() {
+    let mut p = Point { x: 3, y: 5 }; // p must be mutable
+    p.move_by(2, 3); // p is mutably borrowed
+    println!("Moved Point: ({}, {})", p.x, p.y);
+}
+```
+### **Why Distinction Matters**
+1. **Ownership and Borrowing Rules**:
+    - A `&self` method allows multiple calls simultaneously because it doesn't modify the object.
+    - A `&mut self` method requires exclusive access to the object while it is being called.
+2. **Safety**:
+    - Rust enforces that immutable and mutable borrows cannot coexist, preventing data races.
+## **Reference Behavior in `&self` and `&mut self`**
+### **1. Passing `self` by Reference**
+Both `&self` and `&mut self` are syntactic sugar for explicit references to `self`:
+- `fn method(&self)` is shorthand for `fn method(self: &Self)`.
+- `fn method(&mut self)` is shorthand for `fn method(self: &mut Self)`.
+This means `self` is a **reference** to the object, not the object itself.
+```rust
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+impl Point {
+    // Explicit reference
+    fn get_coordinates(self: &Self) -> (i32, i32) {
+        (self.x, self.y)
+    }
+    fn move_by(self: &mut Self, dx: i32, dy: i32) {
+        self.x += dx;
+        self.y += dy;
+    }
+}
+```
+### **2. Ownership of `self`**
+You can also define methods that take ownership of `self` instead of borrowing it. These are useful when you want the method to consume the instance.
+```rust
+impl Point {
+    fn into_tuple(self) -> (i32, i32) {
+        (self.x, self.y) // Takes ownership of self
+    }
+}
+
+fn main() {
+    let p = Point { x: 3, y: 5 };
+    let tuple = p.into_tuple(); // p is consumed and no longer valid
+    println!("Point as tuple: {:?}", tuple);
+}
+```
+## **Reference Mutability Rules with `&self` and `&mut self`**
+### **Immutable References (`&self`)**
+Multiple immutable references can coexist safely because no modifications are allowed.
+```rust
+fn main() {
+    let p = Point { x: 3, y: 5 };
+
+    let r1 = &p;
+    let r2 = &p;
+
+    println!("r1: ({}, {}), r2: ({}, {})", r1.x, r1.y, r2.x, r2.y);
+    // Both r1 and r2 can access `p` at the same time.
+}
+```
+### **Mutable References (`&mut self`)**
+Only one mutable reference is allowed at a time.
+```rust
+fn main() {
+    let mut p = Point { x: 3, y: 5 };
+
+    let r1 = &mut p;
+    // let r2 = &mut p; // Error: cannot borrow `p` as mutable more than once
+    r1.x += 1;
+    println!("Updated r1: ({}, {})", r1.x, r1.y);
+}
+```
+### **Immutable and Mutable References Cannot Coexist**
+Rust prevents simultaneous mutable and immutable references to ensure safety.
+```rust
+fn main() {
+    let mut p = Point { x: 3, y: 5 };
+
+    let r1 = &p;          // Immutable borrow
+    // let r2 = &mut p;   // Error: cannot borrow `p` as mutable because it is already borrowed immutably
+    println!("Immutable r1: ({}, {})", r1.x, r1.y);
+}
+```
+## **Use Cases for `&self`, `&mut self`, and `self`**
+1. **Use `&self`**:
+    - When the method does not modify the instance.
+    - Example: `fn len(&self) -> usize`.
+2. **Use `&mut self`**:
+    - When the method modifies the instance.
+    - Example: `fn push(&mut self, value: T)`.
+3. **Use `self`**:
+    - When the method consumes the instance (e.g., transforms it or moves its contents elsewhere).
+    - Example: `fn into_vec(self) -> Vec<T>`.
+## **Advanced Nuances**
+### **1. Chaining Mutable Methods**
+Mutable methods can be chained if they return `&mut self`:
+```rust
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+impl Point {
+    fn move_x(&mut self, dx: i32) -> &mut Self {
+        self.x += dx;
+        self
+    }
+    fn move_y(&mut self, dy: i32) -> &mut Self {
+        self.y += dy;
+        self
+    }
+}
+
+fn main() {
+    let mut p = Point { x: 0, y: 0 };
+
+    p.move_x(5).move_y(3); // Method chaining
+    println!("Point: ({}, {})", p.x, p.y);
+}
+```
+### **2. Using `self` with Closures**
+Passing `self` into closures requires understanding borrowing vs. ownership:
+```rust
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+fn main() {
+    let p = Point { x: 3, y: 5 };
+
+    let closure = move || {
+        println!("Point: ({}, {})", p.x, p.y);
+    }; // `p` is moved into the closure
+    closure();
+}
+```
+# Dereferencing
+Dereferencing in Rust involves accessing the data that a reference or pointer points to. Rust has strict and well-defined rules for dereferencing, ensuring safety while allowing you to work with references and smart pointers.
+In Rust, this is done using the **dereference operator** (`*`).
+```rust
+fn main() {
+    let x = 5;
+    let y = &x; // y is a reference to x
+
+    println!("y: {}", *y); // Dereferencing y to access the value of x
+}
+// y: 5
+```
+## **Types of References and Pointers in Rust**
+1. **References** (`&T` and `&mut T`): Borrowed references.
+2. **Raw Pointers** (`*const T` and `*mut T`): Unsafe, low-level pointers.
+3. **Smart Pointers**: Abstractions over raw pointers, like `Box<T>`, `Rc<T>`, or `Arc<T>`.
+
+
+
+
+## The 'ref' keyword
+Sometimes you may be want to use some portion of a tuple or a struct as a reference while other parts as owned values. For instance, consider the code below
+```rust
+fn main() {
+     let tuple = (String::from("Hello"), 42);
+     let (s, num) = tuple;
+}
+```
+
+We would like 's' to use a reference to string, while `num` as owned value. If we use the
+
+```rust
+ let (s, num) = &tuple;
+```
+it will make both `s` and `num` as references. To achieve the desired behaviour, we can use the ref keyword. The updated statement will look like
+```rust
+let (ref s, num) = tuple;
+```
+This will make the type of s as a &String while `num` will remain as owned value with a type of i32. Although specific use cases of this is rare, this is just good to know.

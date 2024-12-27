@@ -294,10 +294,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Rust Notes/Compound Data Types.md"
+                "file": "Rust Notes/Ownership & Borrowing.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Compound Data Types"
+              "title": "Outline of Ownership & Borrowing"
             }
           }
         ],
@@ -321,11 +321,11 @@
   },
   "active": "4bd1dbcdc7b01600",
   "lastOpenFiles": [
-    "Rust Notes/Control Flow.md",
     "Rust Notes/Compound Data Types.md",
+    "Rust Notes/Ownership & Borrowing.md",
+    "Rust Notes/Control Flow.md",
     "Rust Notes/Functions and Blocks.md",
     "Rust Notes/Rust Atomics and Memory Ordering.md",
-    "Rust Notes/Ownership & Borrowing.md",
     "Algorithmic Trading/Basics.md",
     "Go Concurrency/The `select` statement.md",
     "Algorithmic Trading",

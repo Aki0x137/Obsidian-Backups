@@ -513,3 +513,4 @@ for (i, val) in v.iter().enumerate() {
 - Use `_` to ignore elements you don’t need.
 - Nested tuples and guards allow complex and precise matching.
 - Use `if let` when you care about a single pattern.
+# Struct
