@@ -133,5 +133,46 @@ fn main() {
 // [ 1, 2, 3 ]
 // [ 1, 2, 3, 4 ]
 ```
+#### Dangling References (Prevented by Rust)
+Rust ensures that references are never dangling.
+```rust
+fn main() {
+    let r;
+    {
+        let x = 5;
+        r = &x; // Error: x does not live long enough
+    }
+    println!("{}", r); // !!! r would point to invalid memory
+}
+```
+
+## Special Cases
+### **Borrowing and Mutability**
+Even if a value is mutable, an immutable reference can still be created as long as there are no active mutable references.
+```rust
+fn main() {
+    let mut s = String::from("hello");
+
+    let r1 = &s; // Immutable reference
+    println!("{}", r1); // r1 used here
+    let r2 = &mut s; // Mutable reference allowed after r1 is done
+    r2.push_str(", world");
+    println!("{}", r2);
+}
+```
+### **Reborrowing**
+Rust allows **reborrowing** of references.
+```rust
+fn main() {
+    let mut s = String::from("hello");
+
+    let r1 = &mut s;
+    let r2 = &*r1; // Reborrowing as immutable reference
+    println!("{}", r2);
+}
+```
+
+
+
 
 // More notes from Doug Milford video
