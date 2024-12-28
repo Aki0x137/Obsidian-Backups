@@ -19,7 +19,6 @@ fn print_str(s: &str) {
 }
 ```
 ## String
-
 - Owned, grow-able string
 - Mutable
 - Stored on heap
@@ -769,3 +768,205 @@ fn main() {
 ## **Summary**
 - A **partial move** allows ownership of individual fields of a struct to be transferred while leaving the remaining fields valid.
 - Rust's borrow checker ensures you can't access moved fields or violate borrowing rules.
+# Enum
+In Rust, **enums** (short for "enumerations") are a way to define a type by enumerating its possible variants. Each variant of an enum can optionally hold data, making enums highly flexible for modeling complex data structures or states.
+### **Defining Enums**
+Enums allow you to define a type with multiple variants. A simple enum might look like this:
+```rust
+enum Direction {
+    North,
+    South,
+    East,
+    West,
+}
+```
+The `Direction` enum defines four possible values (`North`, `South`, `East`, and `West`). These are called **variants**.
+### **Using Enums**
+You can use enums in your program by creating instances of their variants and performing operations on them.
+```rust
+fn main() {
+    let dir = Direction::North;
+
+    match dir {
+        Direction::North => println!("Heading North"),
+        Direction::South => println!("Heading South"),
+        Direction::East => println!("Heading East"),
+        Direction::West => println!("Heading West"),
+    }
+}
+```
+Here:
+- `match` is used to pattern match on the enum variants.
+- `Direction::North` specifies the `North` variant of the `Direction` enum.
+### **Enums with Data**
+Unlike some other languages, Rust enums can hold data in their variants. Each variant can optionally store values, enabling enums to represent more complex data structures.
+**Example**:
+```rust
+enum Shape {
+    Circle { radius: f64 },
+    Rectangle { width: f64, height: f64 },
+}
+
+fn main() {
+    let shape = Shape::Circle { radius: 5.0 };
+
+    match shape {
+        Shape::Circle { radius } => println!("Circle with radius {}", radius),
+        Shape::Rectangle { width, height } => {
+            println!("Rectangle with width {} and height {}", width, height);
+        }
+    }
+}
+```
+### **Enums and Option Types**
+Rust's **`Option`** type is an enum that represents optional values. It is defined as:
+```rust
+enum Option<T> {
+    Some(T),
+    None,
+}
+```
+**Example**:
+```rust
+fn main() {
+    let some_number: Option<i32> = Some(5);
+    let no_number: Option<i32> = None;
+
+    match some_number {
+        Some(x) => println!("We have a number: {}", x),
+        None => println!("No number found"),
+    }
+}
+```
+**Use case**: `Option` is used to represent the presence (`Some`) or absence (`None`) of a value without relying on nulls.
+### **Enums and Result Types**
+Rust's **`Result`** type is another common enum used for error handling. It is defined as:
+```rust
+enum Result<T, E> {
+    Ok(T),
+    Err(E),
+}
+```
+**Example**:
+```rust
+fn divide(dividend: i32, divisor: i32) -> Result<i32, String> {
+    if divisor == 0 {
+        Err(String::from("Cannot divide by zero"))
+    } else {
+        Ok(dividend / divisor)
+    }
+}
+
+fn main() {
+    match divide(10, 2) {
+        Ok(result) => println!("Result: {}", result),
+        Err(err) => println!("Error: {}", err),
+    }
+}
+```
+**Use case**: `Result` is essential for handling operations that might succeed (`Ok`) or fail (`Err`), making it a cornerstone of error handling in Rust.
+### **Methods in Enums**
+You can define methods for enums using `impl`. This allows you to encapsulate logic specific to the enum.
+```rust
+enum TrafficLight {
+    Red,
+    Yellow,
+    Green,
+}
+
+impl TrafficLight {
+    fn duration(&self) -> u32 {
+        match self {
+            TrafficLight::Red => 60,
+            TrafficLight::Yellow => 5,
+            TrafficLight::Green => 30,
+        }
+    }
+}
+
+fn main() {
+    let light = TrafficLight::Red;
+    println!("Red light duration: {} seconds", light.duration());
+}
+```
+### **Enums and Pattern Matching**
+Enums are closely tied to Rust's powerful **pattern matching** feature, allowing you to handle different cases cleanly.
+```rust
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(u8, u8, u8),
+}
+
+fn main() {
+    let msg = Message::Move { x: 10, y: 20 };
+
+    match msg {
+        Message::Quit => println!("Quit message"),
+        Message::Move { x, y } => println!("Move to ({}, {})", x, y),
+        Message::Write(text) => println!("Message: {}", text),
+        Message::ChangeColor(r, g, b) => println!("Change color to ({}, {}, {})", r, g, b),
+    }
+}
+```
+### **Enum Variants Without `::`**
+When an enum is in scope, you can refer to its variants without the `EnumName::` prefix by using `use`.
+```rust
+enum Direction {
+    North,
+    South,
+    East,
+    West,
+}
+
+fn main() {
+    use Direction::*;
+
+    let dir = North; // No need for Direction::North
+
+    match dir {
+        North => println!("North"),
+        South => println!("South"),
+        East => println!("East"),
+        West => println!("West"),
+    }
+}
+```
+### **Enums with Default Values**
+You can derive the `Default` trait for enums to provide a default variant.
+```rust
+#[derive(Debug, Default)]
+enum Status {
+    #[default]
+    Active,
+    Inactive,
+    Pending,
+}
+
+fn main() {
+    let status: Status = Default::default();
+    println!("{:?}", status); // Prints "Active"
+}
+```
+### **When to Use Enums**
+
+1. **Modeling State**: Enums are great for representing states with distinct variants.
+    - Example: A traffic light with `Red`, `Yellow`, `Green`.
+2. **Handling Options**: Use `Option` for scenarios where a value might or might not exist.
+3. **Error Handling**: Use `Result` to represent operations that may succeed or fail.
+4. **Complex Data Variants**: Enums with fields can model complex data structures, such as shapes with differing attributes (e.g., `Circle` vs `Rectangle`).
+5. **Event-Driven Systems**: Representing events or messages (e.g., `KeyPress`, `MouseClick`, `Resize`).
+### **Key Features of Enums**
+
+| Feature              | Description                                                        |
+| -------------------- | ------------------------------------------------------------------ |
+| **Variants**         | Each variant of an enum can have unique data.                      |
+| **Pattern Matching** | Allows clean handling of each enum variant.                        |
+| **Encapsulation**    | Methods can be defined on enums for behavior specific to the type. |
+| **Flexible Storage** | Enums can store different types and amounts of data per variant.   |
+| **Null Safety**      | Replace nullable types with `Option`.                              |
+| **Error Handling**   | Use `Result` for error propagation.                                |
+## **Enums and Memory Layout**:
+Rust optimizes the memory layout of enums. If an enum can only hold one variant at a time, its size is the maximum of its largest variant plus a discriminant.
+
