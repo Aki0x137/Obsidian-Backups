@@ -560,15 +560,84 @@ Methods are functions defined in an `impl` block and are associated with a parti
 1. **Immutable Methods (`&self`)**: Used when the method doesn't modify the instance.
 2. **Mutable Methods (`&mut self`)**: Used when the method modifies the instance.
 3. **Ownership Methods (`self`)**: Consumes the instance and takes ownership.
+### **Immutable Method (`&self`)**
+The method can read fields but cannot modify them.
+**Example**:
+```rust
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
 
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height // Read fields
+    }
+}
 
+fn main() {
+    let rect = Rectangle { width: 10, height: 5 };
+    println!("Area: {}", rect.area()); // Calls the area method
+}
+```
+### **Mutable Method (`&mut self`)**
+The method can modify the fields of the instance.
+**Example**:
+```rust
+impl Rectangle {
+    fn scale(&mut self, factor: u32) {
+        self.width *= factor; // Modify width
+        self.height *= factor; // Modify height
+    }
+}
 
+fn main() {
+    let mut rect = Rectangle { width: 10, height: 5 };
+    rect.scale(2); // Mutates the rectangle
+    println!("Scaled Rectangle: {} x {}", rect.width, rect.height);
+}
+```
+### **Ownership Method (`self`)**
+The method takes ownership of the instance, consuming it. After calling the method, the instance is no longer valid.
+```rust
+impl Rectangle {
+    fn destroy(self) {
+        println!("Rectangle destroyed: {} x {}", self.width, self.height);
+    }
+}
 
+fn main() {
+    let rect = Rectangle { width: 10, height: 5 };
+    rect.destroy(); // Moves and consumes `rect`
+    // println!("{:?}", rect); // Error: rect is no longer valid
+}
+```
+## **3. Associated Functions**
+Associated functions are functions defined in an `impl` block that **don’t take `self` as a parameter**. These are typically used as **constructors** or **utility functions**.
+**Syntax**:
+```rust
+impl TypeName {
+    fn function_name(args) -> ReturnType {
+        // Function body
+    }
+}
+```
+**Example of an Associated Function**:
+```rust
+impl Rectangle {
+    fn new(width: u32, height: u32) -> Self {
+        Self { width, height } // Create a new instance
+    }
+}
 
-
-
-
-
+fn main() {
+    let rect = Rectangle::new(10, 5); // Call associated function
+    println!("Rectangle: {} x {}", rect.width, rect.height);
+}
+```
+### Key Differences:
+- Methods: Require `self`, `&self`, or `&mut self` as their first parameter.
+- Associated Functions: Don’t have a `self` parameter. They’re called directly on the type.
 
 
 
