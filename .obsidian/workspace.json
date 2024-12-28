@@ -181,12 +181,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Rust Notes/Compound Data Types.md",
+                "file": "Rust Notes/Code Organization and Visibility.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Compound Data Types"
+              "title": "Code Organization and Visibility"
             }
           }
         ],
@@ -246,7 +246,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 292.51103591918945
+    "width": 297.5
   },
   "right": {
     "id": "a081824b716ea4c6",
@@ -308,10 +308,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Rust Notes/Compound Data Types.md"
+                "file": "Rust Notes/Code Organization and Visibility.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Compound Data Types"
+              "title": "Outline of Code Organization and Visibility"
             }
           }
         ],
@@ -319,7 +319,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 332.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -334,6 +334,7 @@
   },
   "active": "49daa4f98536fb49",
   "lastOpenFiles": [
+    "Rust Notes/Compound Data Types.md",
     "Rust Notes/Collections and Data Structures.md",
     "Rust Notes/Code Organization and Visibility.md",
     "Excalidraw/Rust-Code-Organization.md",
@@ -342,7 +343,6 @@
     "Media/Pasted image 20240714153535.png",
     "Excalidraw/Drawing 2024-07-14 22.10.00.excalidraw.md",
     "Rust Notes/Control Flow.md",
-    "Rust Notes/Compound Data Types.md",
     "Rust Notes/Ownership & Borrowing.md",
     "Rust Notes/Functions and Blocks.md",
     "Rust Notes/Rust Atomics and Memory Ordering.md",

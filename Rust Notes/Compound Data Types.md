@@ -531,7 +531,7 @@ fn main() {
     println!("Name: {}, Age: {}", user.name, user.age);
 }
 ```
-## **1. `impl` Blocks**
+## 1. `impl` Blocks
 An `impl` block is where you define methods and associated functions for a struct, enum, or trait. It binds specific behavior to the type.
 **Syntax**:
 ```rust
@@ -553,7 +553,7 @@ impl Rectangle {
 }
 ```
 Here, the `impl` block binds the `area` function to the `Rectangle` struct, making it a **method**.
-## **2. Methods**
+## 2. Methods
 Methods are functions defined in an `impl` block and are associated with a particular type. They take a **reference to `self`** as their first parameter, representing an instance of the type.
 ### Types of Methods:
 1. **Immutable Methods (`&self`)**: Used when the method doesn't modify the instance.
@@ -579,7 +579,7 @@ fn main() {
     println!("Area: {}", rect.area()); // Calls the area method
 }
 ```
-### **Mutable Method (`&mut self`)**
+### Mutable Method (`&mut self`)
 The method can modify the fields of the instance.
 **Example**:
 ```rust
@@ -596,7 +596,7 @@ fn main() {
     println!("Scaled Rectangle: {} x {}", rect.width, rect.height);
 }
 ```
-### **Ownership Method (`self`)**
+### Ownership Method (`self`)
 The method takes ownership of the instance, consuming it. After calling the method, the instance is no longer valid.
 ```rust
 impl Rectangle {
@@ -611,7 +611,7 @@ fn main() {
     // println!("{:?}", rect); // Error: rect is no longer valid
 }
 ```
-## **3. Associated Functions**
+## 3. Associated Functions
 Associated functions are functions defined in an `impl` block that **don’t take `self` as a parameter**. These are typically used as **constructors** or **utility functions**.
 **Syntax**:
 ```rust
@@ -642,7 +642,7 @@ fn main() {
 
 
 
-### **Partial Move**
+### Partial Move
 A **partial move** occurs when only certain fields of a struct are moved out (ownership is transferred), leaving the remaining fields valid.
 ```rust
 struct User {
