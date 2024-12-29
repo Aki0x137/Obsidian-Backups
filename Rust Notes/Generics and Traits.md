@@ -714,7 +714,8 @@ trait Grandparent {
 - Use generics when:
     - You need multiple type parameters.
     - You want the caller to decide the type.
-    - Types can vary independently of the trait implementation.
+    - Types can vary independently of the **same** trait implementation. \[IMPORTANT\]
+    - When we want multiple implementation of a trait for a type.
 ## **8. Practical Examples**
 ### Rust Standard Library Example: `Iterator`
 ```rust
