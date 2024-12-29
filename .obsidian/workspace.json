@@ -181,12 +181,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Rust Notes/Generics and Traits.md",
+                "file": "Rust Notes/Functional Programming.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Generics and Traits"
+              "title": "Functional Programming"
             }
           }
         ],
@@ -308,10 +308,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Rust Notes/Generics and Traits.md"
+                "file": "Rust Notes/Functional Programming.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Generics and Traits"
+              "title": "Outline of Functional Programming"
             }
           }
         ],
@@ -334,8 +334,9 @@
   },
   "active": "49daa4f98536fb49",
   "lastOpenFiles": [
-    "Rust Notes/Code Organization and Visibility.md",
     "Rust Notes/Generics and Traits.md",
+    "Rust Notes/Functional Programming.md",
+    "Rust Notes/Code Organization and Visibility.md",
     "Rust Notes/Compound Data Types.md",
     "Rust Notes/Collections and Data Structures.md",
     "Excalidraw/Rust-Code-Organization.md",
@@ -366,7 +367,6 @@
     "Distributed-Systems-Cohort/SAT Solvers.md",
     "Observability and OpenTelemetry",
     "Distributed-Systems-Cohort/Requirements.md",
-    "Excalidraw/Parallel computation DAG.md",
     "Excalidraw",
     "Media",
     "Distributed-Systems-Cohort",
