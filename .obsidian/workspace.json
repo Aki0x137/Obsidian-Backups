@@ -181,12 +181,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Rust Notes/Lifetimes and Pointers.md",
+                "file": "Algorithmic Trading/Basics.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Lifetimes and Pointers"
+              "title": "Basics"
             }
           }
         ],
@@ -308,10 +308,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Rust Notes/Lifetimes and Pointers.md"
+                "file": "Algorithmic Trading/Basics.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Lifetimes and Pointers"
+              "title": "Outline of Basics"
             }
           }
         ],
@@ -334,9 +334,9 @@
   },
   "active": "49daa4f98536fb49",
   "lastOpenFiles": [
+    "Rust Notes/Lifetimes and Pointers.md",
     "Rust Notes/Ownership & Borrowing.md",
     "Rust Notes/Rust Atomics and Memory Ordering.md",
-    "Rust Notes/Lifetimes and Pointers.md",
     "Rust Notes/Functional Programming.md",
     "Rust Notes/Generics and Traits.md",
     "Rust Notes/Code Organization and Visibility.md",
