@@ -181,12 +181,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Rust Notes/Rust Atomics and Memory Ordering.md",
+                "file": "Rust Notes/Lifetimes and Pointers.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Rust Atomics and Memory Ordering"
+              "title": "Lifetimes and Pointers"
             }
           }
         ],
@@ -308,10 +308,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Rust Notes/Rust Atomics and Memory Ordering.md"
+                "file": "Rust Notes/Lifetimes and Pointers.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Rust Atomics and Memory Ordering"
+              "title": "Outline of Lifetimes and Pointers"
             }
           }
         ],
@@ -335,8 +335,8 @@
   "active": "49daa4f98536fb49",
   "lastOpenFiles": [
     "Rust Notes/Ownership & Borrowing.md",
-    "Rust Notes/Lifetimes and Pointers.md",
     "Rust Notes/Rust Atomics and Memory Ordering.md",
+    "Rust Notes/Lifetimes and Pointers.md",
     "Rust Notes/Functional Programming.md",
     "Rust Notes/Generics and Traits.md",
     "Rust Notes/Code Organization and Visibility.md",

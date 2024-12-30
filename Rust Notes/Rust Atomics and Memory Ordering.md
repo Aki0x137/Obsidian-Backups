@@ -1,3 +1,4 @@
+
 # Why do we need a separate Atomic types?
 
 - There are only certain "ways"(locks and other sync mechanisms) in which multiple threads interacting with primitive values are safe. If the primitive types like uint8, bool, etc are used and shared among thread boundaries, and we don't follow these "ways", we'll have data races and undefined behavior. 
