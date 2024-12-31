@@ -181,12 +181,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Algorithmic Trading/Basics.md",
+                "file": "Rust Notes/Smart Pointers.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Basics"
+              "title": "Smart Pointers"
             }
           }
         ],
@@ -308,10 +308,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Algorithmic Trading/Basics.md"
+                "file": "Rust Notes/Smart Pointers.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Basics"
+              "title": "Outline of Smart Pointers"
             }
           }
         ],
@@ -334,6 +334,8 @@
   },
   "active": "49daa4f98536fb49",
   "lastOpenFiles": [
+    "Algorithmic Trading/Basics.md",
+    "Rust Notes/Smart Pointers.md",
     "Rust Notes/Lifetimes and Pointers.md",
     "Rust Notes/Ownership & Borrowing.md",
     "Rust Notes/Rust Atomics and Memory Ordering.md",
@@ -349,7 +351,6 @@
     "Excalidraw/Drawing 2024-07-14 22.10.00.excalidraw.md",
     "Rust Notes/Control Flow.md",
     "Rust Notes/Functions and Blocks.md",
-    "Algorithmic Trading/Basics.md",
     "Go Concurrency/The `select` statement.md",
     "Algorithmic Trading",
     "Excalidraw/Parallel Computation DAG.md",
@@ -365,7 +366,6 @@
     "Observability and OpenTelemetry/Observability Basics.md",
     "Distributed-Systems-Cohort/Work Scheduling.md",
     "Distributed-Systems-Cohort/Coroutines.md",
-    "Distributed-Systems-Cohort/SAT Solvers.md",
     "Observability and OpenTelemetry",
     "Excalidraw",
     "Media",
