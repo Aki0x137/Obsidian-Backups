@@ -188,9 +188,23 @@
               "icon": "lucide-file",
               "title": "Smart Pointers"
             }
+          },
+          {
+            "id": "6f0e6991b1cc1aed",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Abroad/MS Computer Science.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "MS Computer Science"
+            }
           }
         ],
-        "currentTab": 12
+        "currentTab": 13
       }
     ],
     "direction": "vertical"
@@ -308,10 +322,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Rust Notes/Smart Pointers.md"
+                "file": "Abroad/MS Computer Science.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Smart Pointers"
+              "title": "Outline of MS Computer Science"
             }
           }
         ],
@@ -332,10 +346,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "49daa4f98536fb49",
+  "active": "01aa52feaf57f1ed",
   "lastOpenFiles": [
-    "Algorithmic Trading/Basics.md",
+    "Abroad",
     "Rust Notes/Smart Pointers.md",
+    "Abroad/MS Computer Science.md",
+    "Algorithmic Trading/Basics.md",
     "Rust Notes/Lifetimes and Pointers.md",
     "Rust Notes/Ownership & Borrowing.md",
     "Rust Notes/Rust Atomics and Memory Ordering.md",
@@ -364,8 +380,6 @@
     "Wind-Cache-Library/Requirements.md",
     "Go Concurrency",
     "Observability and OpenTelemetry/Observability Basics.md",
-    "Distributed-Systems-Cohort/Work Scheduling.md",
-    "Distributed-Systems-Cohort/Coroutines.md",
     "Observability and OpenTelemetry",
     "Excalidraw",
     "Media",
