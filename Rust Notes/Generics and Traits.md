@@ -30,7 +30,7 @@ fn square<T: std::ops::Mul<Output = T>>(x: T) -> T {
 }
 
 fn main() {
-    println!("{}", square(4));      // Works with integers
+    println!("{}", square(4));     // Works with integers
     println!("{}", square(3.14));  // Works with floats
 }
 ```

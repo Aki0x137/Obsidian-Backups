@@ -425,4 +425,56 @@ fn main() {
 }
 ```
 By nesting the unsized fields inside their own structs, you can manage multiple unsized fields while keeping the top-level struct usable.
+# Unsized coercion
+**Unsized coercion** refers to the automatic conversion of a type with a known size at compile time (a "sized type") to a type without a known size at compile time (an "unsized type"). This feature is most commonly used in Rust with dynamically sized types (**DSTs**) like slices (`[T]`), string slices (`str`), and trait objects (`dyn Trait`).
+## What is Unsized Coercion?
+Unsized coercion allows Rust to automatically convert a sized type into a reference or pointer to an unsized type. This conversion is **lossless**, as the unsized type is always accompanied by metadata (e.g., the length of a slice or the vtable for a trait object) to ensure it can be used safely.
+### Key Properties
+1. Unsized coercion only works when the source type "dynamically dereferences" into the target type.
+2. The result of coercion must be a pointer or reference type (`&`, `&mut`, `Box`, `Rc`, etc.).
+3. The coercion is implicit and happens automatically in certain contexts, like function arguments or when assigning values.
+### Common Cases of Unsized Coercion
+1. **From Arrays to Slices (`[T; N]` → `[T]`)**
+    - A fixed-size array (`[T; N]`) can be coerced into a slice (`[T]`) because slices are a dynamically sized view into a contiguous sequence of elements.
+```rust
+fn print_slice(slice: &[i32]) {
+    for elem in slice {
+        println!("{}", elem);
+    }
+}
 
+fn main() {
+    let arr = [1, 2, 3];
+    print_slice(&arr); // Coerces &[i32; 3] into &[i32]
+}
+```
+- The compiler automatically converts `&[i32; 3]` into `&[i32]`, carrying the length of the array as metadata.
+2. **From `String` to `str`**
+    - The `String` type is a heap-allocated, growable string, whereas `str` is an unsized string slice. You can coerce `&String` to `&str`.
+    - The coercion works because `String` implements `Deref<Target = str>`.
+```rust
+fn greet(name: &str) {
+    println!("Hello, {}!", name);
+}
+
+fn main() {
+    let name = String::from("Alice");
+    greet(&name); // Coerces &String into &str
+}
+```
+	
+3. **From Structs with Unsized Fields**
+    - A struct with its last field as an unsized type can coerce into a reference to an unsized version of the struct.
+    - Here, the coercion happens because the struct's last field is dynamically sized.
+```rust
+struct Foo<T: ?Sized> {
+    value: T,
+}
+
+fn main() {
+    let foo: &Foo<[i32]> = &Foo { value: [1, 2, 3] };
+    println!("{:?}", foo.value);
+}
+```
+4. **From Concrete Types to Trait Objects (`T` → `dyn Trait`)**
+    - A type implementing a trait can be coerced into a reference to the corresponding trait object (`dyn Trait`).

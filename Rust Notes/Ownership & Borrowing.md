@@ -1,5 +1,4 @@
 # Ownership
-
  - Deals with how a memory reference is managed in a program.
  - Any program when executing, stores data in two different regions of computer volatile memory with different guarantees:
 	 - **Stack**: Stores local variables, that have scope limited to a function execution or block, and whose size is known during compile time.
@@ -159,9 +158,8 @@ fn get_first_element(num_vec: &Vec<i32>) -> &i32 {
 	&num_vec[0]
 }
 ```
-
 ## Special Cases
-### **Borrowing and Mutability**
+### Borrowing and Mutability
 Even if a value is mutable, an immutable reference can still be created as long as there are no active mutable references.
 ```rust
 fn main() {
@@ -174,7 +172,7 @@ fn main() {
     println!("{}", r2);
 }
 ```
-### **Reborrowing**
+### Reborrowing
 Rust allows **reborrowing** of references.
 ```rust
 fn main() {
@@ -203,7 +201,7 @@ let move_ref_again = ref_1; // error out, trying to create another mutable ref f
 # `&mut self` and `&self` 
 In Rust, the usage of `&self`, `&mut self`, and their relationship with references revolves around **ownership**, **borrowing**, and **mutability** when implementing methods for structs or enums. Let’s delve into their meanings and nuances.
 ## `&self` and `&mut self` in Method Definitions
-### **1. `&self`: Immutable Borrow**
+### 1. `&self`: Immutable Borrow
 - When a method takes `&self`, it borrows the instance of the type immutably.
 - This means the method can **read** but not **modify** the instance.
 ```rust
@@ -225,7 +223,7 @@ fn main() {
     println!("Coordinates: {:?}", coords); // p is still valid here
 }
 ```
-### **2. `&mut self`: Mutable Borrow**
+### 2. `&mut self`: Mutable Borrow
 - When a method takes `&mut self`, it borrows the instance **mutably**.
 - This allows the method to both **read** and **modify** the instance.
 ```rust
@@ -248,14 +246,14 @@ fn main() {
     println!("Moved Point: ({}, {})", p.x, p.y);
 }
 ```
-### **Why Distinction Matters**
+### Why Distinction Matters
 1. **Ownership and Borrowing Rules**:
     - A `&self` method allows multiple calls simultaneously because it doesn't modify the object.
     - A `&mut self` method requires exclusive access to the object while it is being called.
 2. **Safety**:
     - Rust enforces that immutable and mutable borrows cannot coexist, preventing data races.
-## **Reference Behavior in `&self` and `&mut self`**
-### **1. Passing `self` by Reference**
+## Reference Behavior in `&self` and `&mut self`
+### 1. Passing `self` by Reference
 Both `&self` and `&mut self` are syntactic sugar for explicit references to `self`:
 - `fn method(&self)` is shorthand for `fn method(self: &Self)`.
 - `fn method(&mut self)` is shorthand for `fn method(self: &mut Self)`.
@@ -277,7 +275,7 @@ impl Point {
     }
 }
 ```
-### **2. Ownership of `self`**
+### 2. Ownership of `self`
 You can also define methods that take ownership of `self` instead of borrowing it. These are useful when you want the method to consume the instance.
 ```rust
 impl Point {
@@ -292,8 +290,8 @@ fn main() {
     println!("Point as tuple: {:?}", tuple);
 }
 ```
-## **Reference Mutability Rules with `&self` and `&mut self`**
-### **Immutable References (`&self`)**
+## Reference Mutability Rules with `&self` and `&mut self`
+### Immutable References (`&self`)
 Multiple immutable references can coexist safely because no modifications are allowed.
 ```rust
 fn main() {
@@ -306,7 +304,7 @@ fn main() {
     // Both r1 and r2 can access `p` at the same time.
 }
 ```
-### **Mutable References (`&mut self`)**
+### Mutable References (`&mut self`)
 Only one mutable reference is allowed at a time.
 ```rust
 fn main() {
@@ -318,7 +316,7 @@ fn main() {
     println!("Updated r1: ({}, {})", r1.x, r1.y);
 }
 ```
-### **Immutable and Mutable References Cannot Coexist**
+### Immutable and Mutable References Cannot Coexist
 Rust prevents simultaneous mutable and immutable references to ensure safety.
 ```rust
 fn main() {
@@ -329,7 +327,7 @@ fn main() {
     println!("Immutable r1: ({}, {})", r1.x, r1.y);
 }
 ```
-## **Use Cases for `&self`, `&mut self`, and `self`**
+## Use Cases for `&self`, `&mut self`, and `self`
 1. **Use `&self`**:
     - When the method does not modify the instance.
     - Example: `fn len(&self) -> usize`.
@@ -339,8 +337,8 @@ fn main() {
 3. **Use `self`**:
     - When the method consumes the instance (e.g., transforms it or moves its contents elsewhere).
     - Example: `fn into_vec(self) -> Vec<T>`.
-## **Advanced Nuances**
-### **1. Chaining Mutable Methods**
+## Advanced Nuances
+### 1. Chaining Mutable Methods
 Mutable methods can be chained if they return `&mut self`:
 ```rust
 struct Point {
@@ -366,7 +364,7 @@ fn main() {
     println!("Point: ({}, {})", p.x, p.y);
 }
 ```
-### **2. Using `self` with Closures**
+### 2. Using `self` with Closures
 Passing `self` into closures requires understanding borrowing vs. ownership:
 ```rust
 struct Point {
@@ -395,12 +393,12 @@ fn main() {
 }
 // y: 5
 ```
-## **Types of References and Pointers in Rust**
+## Types of References and Pointers in Rust
 1. **References** (`&T` and `&mut T`): Borrowed references.
 2. **Raw Pointers** (`*const T` and `*mut T`): Unsafe, low-level pointers.
 3. **Smart Pointers**: Abstractions over raw pointers, like `Box<T>`, `Rc<T>`, or `Arc<T>`.
-## **1. Dereferencing Safe References**
-### **Immutable References (`&T`)**
+## 1. Dereferencing Safe References
+### Immutable References (`&T`)
 - You can dereference an immutable reference to **read** the value it points to.
 - Rust guarantees that the data being referred to is valid and will not be modified during the lifetime of the reference.
 ```rust
@@ -414,7 +412,7 @@ fn main() {
 #### Key Rules:
 - You can have **multiple immutable references** to the same value at the same time.
 - You **cannot modify** the value through an immutable reference.
-### **Mutable References (`&mut T`)**
+### Mutable References (`&mut T`)
 - You can dereference a mutable reference to **read** or **write** the value it points to.
 - Rust enforces that there is **only one mutable reference** to a value at a time to ensure no data races.
 ```rust
@@ -429,7 +427,7 @@ fn main() {
 #### Key Rules:
 - You can only have **one mutable reference** to a value at a time.
 - A mutable reference cannot coexist with immutable references to the same value.
-### **Immutable vs. Mutable Reference Rules**
+### Immutable vs. Mutable Reference Rules
 Rust prevents mutable and immutable references from coexisting:
 ```rust
 fn main() {
@@ -464,7 +462,6 @@ fn main() {
     println!("Value through Rc: {}", *rc); // Dereferencing Rc
 }
 ```
-
 ### `Deref` and `DerefMut` Traits`
 Rust uses the `Deref` and `DerefMut` traits to define custom dereferencing behavior for smart pointers.
 #### Rules:
@@ -526,7 +523,9 @@ fn main() {
 - Dereferencing raw pointers requires an `unsafe` block.
 - Use with extreme care to avoid invalid memory access or undefined behavior.
 ## 4. Deref Coercion
-Rust performs **deref coercion** automatically to make smart pointers behave like references. This happens when a smart pointer is used in a context where a reference is expected.
+**Deref coercion** is a convenience feature in Rust that automatically converts (or coerces) references to a type when the target type implements the `Deref` trait. It allows you to call methods or access fields of the target type as if the reference were already dereferenced, reducing the need for explicit dereferencing (`*`).
+
+This feature is commonly used to make smart pointers like `Box`, `Rc`, or `Arc` behave like regular references, enabling ergonomic access to the data they manage.
 ### Example:
 ```rust
 use std::ops::Deref;
@@ -551,6 +550,179 @@ fn main() {
     hello(&name); // Deref coercion: MyBox<String> -> &String -> &str
 }
 ```
+### How Deref Coercion Works
+If a type implements the `Deref` trait, Rust automatically inserts calls to the `deref` method when it sees that a reference to a type needs to be converted to a reference of another type.
+**Signature of the `Deref` Trait**:
+```rust
+use std::ops::Deref;
+
+trait Deref {
+    type Target: ?Sized; // The type being pointed to (can be unsized)
+    fn deref(&self) -> &Self::Target;
+}
+```
+The `deref` method is used to return a reference to the inner value (`&Self::Target`).
+#### Example of Deref Coercion:
+```rust
+use std::ops::Deref;
+
+struct MyBox<T>(T);
+
+impl<T> Deref for MyBox<T> {
+    type Target = T;
+
+    fn deref(&self) -> &T {
+        &self.0
+    }
+}
+
+fn main() {
+    let x = MyBox(5);
+    let y = *x; // Works because `Deref` is implemented
+    println!("{}", y); // Prints 5
+}
+```
+Here, `MyBox` behaves like a reference to the inner type (`T`) because of the `Deref` implementation.
+### Common Use Cases
+1. **Smart Pointers**: Rust's built-in smart pointers like `Box<T>`, `Rc<T>`, and `Arc<T>` implement `Deref`. This allows you to treat smart pointers as regular references.
+Example:
+```rust
+use std::rc::Rc;
+
+let s = Rc::new(String::from("Hello, Rust!"));
+println!("{}", s.len()); // Automatically dereferences Rc<String> to String
+```
+The `Deref` trait allows the compiler to interpret `s.len()` as:
+```rust
+println!("{}", (*s).len());
+```
+2. **String Slices (`&str`) from `String`**: The `String` type implements `Deref` with `Target = str`. This means you can use a `String` where a `&str` is expected.
+Example:
+```rust
+fn greet(name: &str) {
+    println!("Hello, {}!", name);
+}
+
+let name = String::from("Alice");
+greet(&name); // Deref coercion: &String -> &str
+```
+Without deref coercion, you'd need to write:
+```rust
+greet(&name[..]); // Explicitly taking a slice
+```
+3. **Trait Object Coercion (`dyn Trait`)**: Deref coercion is also used when converting between references to trait objects.
+Example:
+```rust
+trait Drawable {
+    fn draw(&self);
+}
+
+struct Circle;
+
+impl Drawable for Circle {
+    fn draw(&self) {
+        println!("Drawing a circle.");
+    }
+}
+
+fn display(item: &dyn Drawable) {
+    item.draw();
+}
+
+let circle = Circle;
+display(&circle); // Deref coercion to &dyn Drawable
+```
+### Rules for Deref Coercion
+1. **Chaining**: Deref coercion can apply recursively. If `T` dereferences to `U`, and `U` dereferences to `V`, the compiler can perform a chained coercion from `T` to `V`.
+Example:
+```rust
+let s = Rc::new(Box::new(String::from("Hello")));
+println!("{}", s.len()); // Rc<Box<String>> -> Box<String> -> String
+```
+2. **Shared and Mutable References**:
+	- **Shared references (`&T`)**: The `deref` method is called.
+	- **Mutable references (`&mut T`)**: The `deref_mut` method (from the `DerefMut` trait) is called.
+Example:
+```rust
+use std::ops::{Deref, DerefMut};
+
+struct MyBox<T>(T);
+
+impl<T> Deref for MyBox<T> {
+    type Target = T;
+    fn deref(&self) -> &T {
+        &self.0
+    }
+}
+
+impl<T> DerefMut for MyBox<T> {
+    fn deref_mut(&mut self) -> &mut T {
+        &mut self.0
+    }
+}
+
+fn modify(value: &mut i32) {
+    *value += 1;
+}
+
+let mut x = MyBox(5);
+modify(&mut x); // Deref coercion to &mut i32
+println!("{}", *x); // Prints 6
+```
+3. **No Deref Coercion for Raw Pointers**: Deref coercion does not apply to raw pointers (`*const T` or `*mut T`) because raw pointers are not safe to dereference directly.
+	- You must explicitly use `unsafe` to dereference raw pointers.
+Example:
+```rust
+let x: i32 = 10;
+let raw: *const i32 = &x;
+
+// println!("{}", *raw); // Error: cannot dereference raw pointers safely
+unsafe {
+    println!("{}", *raw); // Explicit unsafe block
+}
+```
+### Limitations and Notes
+1. **Explicit Deref Needed in Some Cases**: While deref coercion is powerful, it might not apply in every situation. For instance, when method resolution is ambiguous, you might need to explicitly dereference.
+Example:
+```rust
+struct A;
+struct B;
+
+impl A {
+    fn method(&self) {
+        println!("A's method");
+    }
+}
+
+impl B {
+    fn method(&self) {
+        println!("B's method");
+    }
+}
+
+impl std::ops::Deref for B {
+    type Target = A;
+
+    fn deref(&self) -> &A {
+        &A
+    }
+}
+
+let b = B;
+
+// b.method(); // Error: ambiguous method resolution
+(*b).method(); // Explicit dereference to call A's method
+```
+2. **Cannot Coerce to Arbitrary Types**: Deref coercion only works for types that implement `Deref` (or `DerefMut`). You cannot coerce arbitrary types into each other without explicit conversions.
+### Summary
+- **Deref coercion** simplifies the syntax when working with references, smart pointers, and trait objects.
+- It relies on the `Deref` (or `DerefMut`) trait to allow implicit dereferencing.
+- Common use cases include:
+    - Smart pointers like `Box`, `Rc`, and `Arc`.
+    - Converting `String` to `&str`.
+    - Trait object coercion.
+- For more advanced use cases, explicit dereferencing (`*`) might still be required.
+---
 ## 5. Safety Rules
 ### Immutable Dereferencing
 - Always safe because the data cannot be modified.
@@ -561,16 +733,15 @@ fn main() {
 ### Raw Pointers
 - Dereferencing requires `unsafe` because Rust cannot validate memory safety.
 - Use when interacting with low-level C APIs or doing manual memory management.
-
 ---
 ## Summary of Rules
 
-| **Reference Type** | **Dereferencing Allowed** | **Safety** | **Key Rule**                               |
-| ------------------ | ------------------------- | ---------- | ------------------------------------------ |
-| `&T`               | Read                      | Safe       | Multiple immutable borrows allowed.        |
-| `&mut T`           | Read and Write            | Safe       | Only one mutable borrow allowed at a time. |
-| `Box<T>`           | Read and Write            | Safe       | Managed ownership with heap allocation.    |
-| `Rc<T>`            | Read                      | Safe       | Shared ownership with reference counting.  |
+| Reference Type | Dereferencing Allowed | Safety | Key Rule                                   |
+| -------------- | --------------------- | ------ | ------------------------------------------ |
+| `&T`           | Read                  | Safe   | Multiple immutable borrows allowed.        |
+| `&mut T`       | Read and Write        | Safe   | Only one mutable borrow allowed at a time. |
+| `Box<T>`       | Read and Write        | Safe   | Managed ownership with heap allocation.    |
+| `Rc<T>`        | Read                  | Safe   | Shared ownership with reference counting.  |
 ## The 'ref' keyword
 Sometimes you may be want to use some portion of a tuple or a struct as a reference while other parts as owned values. For instance, consider the code below
 ```rust
@@ -580,8 +751,7 @@ fn main() {
 }
 ```
 
-We would like 's' to use a reference to string, while `num` as owned value. If we use the
-
+We would like 's' to use a reference to string, while `num` as owned value. If we use the below code:
 ```rust
  let (s, num) = &tuple;
 ```
