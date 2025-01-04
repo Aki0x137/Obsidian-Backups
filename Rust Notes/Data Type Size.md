@@ -76,7 +76,7 @@ let obj: &dyn MyTrait = &MyStruct; // Fat pointer: points to MyStruct and its vt
 ```
 ## Sized Trait
 - **Default Trait**: All types are assumed to be `Sized` unless explicitly marked otherwise.
-- **Unsized Example**: To allow a type to work with unsized types, you can use the `?Sized` bound.
+- **Unsized Example**: To allow a type to work with unsized types, you can use the `?Sized` bound. \[IMPORTANT\]
 - Example:
 ```rust
 struct Wrapper<T: ?Sized> {
@@ -227,3 +227,5 @@ let items: Vec<Box<dyn MyTrait>> = vec![Box::new(MyStruct)];
 - Fat pointers combine a data pointer and metadata to safely manage dynamic sizes or polymorphism.
 - You can use shared references, mutable references, heap pointers (`Box`), or reference counting (`Rc`, `Arc`) to handle unsized types.
 - They are crucial for working with dynamically sized data (e.g., slices, trait objects) or implementing polymorphism.
+
+

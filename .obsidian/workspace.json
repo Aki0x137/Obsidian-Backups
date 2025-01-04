@@ -195,12 +195,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Rust Notes/Generics and Traits.md",
+                "file": "Rust Notes/Data Type Size.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Generics and Traits"
+              "title": "Data Type Size"
             }
           }
         ],
@@ -322,10 +322,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Rust Notes/Generics and Traits.md"
+                "file": "Rust Notes/Data Type Size.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Generics and Traits"
+              "title": "Outline of Data Type Size"
             }
           }
         ],
@@ -348,11 +348,11 @@
   },
   "active": "6f0e6991b1cc1aed",
   "lastOpenFiles": [
+    "Rust Notes/Generics and Traits.md",
     "Rust Notes/Data Type Size.md",
     "Rust Notes/Ownership & Borrowing.md",
     "Rust Notes/Lifetimes and Pointers.md",
     "Rust Notes/Smart Pointers.md",
-    "Rust Notes/Generics and Traits.md",
     "Rust Notes/Rust Atomics and Memory Ordering.md",
     "Media/rust_collection_types.png",
     "Media/Pasted image 20240818200222.png",

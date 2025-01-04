@@ -1,6 +1,6 @@
 # Generics
 Generics in Rust allow to write flexible, reusable, and type-safe code by enabling functions, structs, enums, and traits to work with multiple types while maintaining strict type safety. This is achieved using **type parameters**.
-## **1. Syntax**
+## 1. Syntax
 The generic type parameter is specified using angle brackets `<T>`.
 **Generic Function**:
 ```rust
@@ -22,7 +22,7 @@ enum Option<T> {
     None,
 }
 ```
-## **2. How It Works**
+## 2. How It Works
 Generics are monomorphized during compilation, meaning Rust generates specific implementations of the code for each type that is used. This ensures zero runtime overhead.
 ```rust
 fn square<T: std::ops::Mul<Output = T>>(x: T) -> T {
@@ -34,7 +34,7 @@ fn main() {
     println!("{}", square(3.14));  // Works with floats
 }
 ```
-## **3. Constraints (Traits)**
+## 3. Constraints (Traits)
 You can constrain generic types to ensure they implement certain traits. For example:
 **With a Trait Bound**:
 ```rust
@@ -42,17 +42,17 @@ fn print_sum<T: std::ops::Add<Output = T>>(a: T, b: T) {
     println!("{}", a + b);
 }
 ```
-## **4. Real-World Use Cases**
+## 4. Real-World Use Cases
 - **Collections**: The `Vec<T>` and `HashMap<K, V>` collections in Rust are implemented using generics.
 - **Option and Result Types**: Both `Option<T>` and `Result<T, E>` are generic enums.
 - **Custom Data Structures**: Generic types are ideal for creating reusable structs like `Point<T>` or generic trees.
-## **5. Key Benefits of Generics**
+## 5. Key Benefits of Generics
 - **Code Re-usability**: Avoid writing duplicate code for multiple types.
 - **Type Safety**: Compile-time type checking ensures correctness.
 - **Zero Runtime Cost**: Generics are monomorphized into specific implementations at compile time.
 # Traits
 In Rust, **traits** are a powerful mechanism for defining shared behavior across types. Traits are like interfaces in other languages—they specify a set of methods that a type must implement to satisfy the trait.
-## **1. What Are Traits?**
+## 1. What Are Traits?
 A trait is a collection of method signatures that define behavior. If a type implements a trait, it guarantees the implementation of those methods.
 **Example: Defining a Trait**
 ```rust
@@ -78,7 +78,7 @@ fn main() {
 In this example:
 - The `Speak` trait defines a behavior.
 - The `Dog` type implements the `Speak` trait.
-## **2. Traits with Default Implementations**
+## 2. Traits with Default Implementations
 Traits can include default implementations for methods. Types implementing the trait can override these defaults.
 ```rust
 trait Greet {
@@ -99,7 +99,7 @@ fn main() {
 Here:
 - `Greet` provides a default `greet` method.
 - The `Person` type does not override it but inherits the default behavior.
-## **3. Traits for Operator Overloading**
+## 3. Traits for Operator Overloading
 Traits like `Add`, `Sub`, and others allow for operator overloading in Rust.
 ```rust
 use std::ops::Add;
@@ -128,7 +128,7 @@ fn main() {
     println!("Point: ({}, {})", p3.x, p3.y); // Point: (4, 6)
 }
 ```
-## **4. Blanket Implementations**
+## 4. Blanket Implementations
 Rust allows you to implement traits for all types that satisfy certain bounds.
 #### Example: Implementing a Trait for All Types
 ```rust
@@ -144,7 +144,7 @@ fn main() {
     42.greet(); // Works because Greet is implemented for all types
 }
 ```
-## **5. Trait Objects (Dynamic Dispatch)**
+## 5. Trait Objects (Dynamic Dispatch)
 If you need to work with multiple types implementing the same trait, you can use **trait objects**.
 #### Example: Dynamic Dispatch
 ```rust
@@ -181,7 +181,7 @@ fn main() {
 ```
 Here:
 - `&dyn Speak` is a **trait object**, enabling dynamic dispatch.
-## **6. Auto Traits**
+## 6. Auto Traits
 Certain traits, like `Send` and `Sync`, are automatically implemented for types where applicable.
 **Example**:
 ```rust
@@ -189,7 +189,7 @@ fn requires_send<T: Send>(item: T) {
     // Only types that implement `Send` can be passed
 }
 ```
-## **7. Common Traits in Rust**
+## 7. Common Traits in Rust
 
 | Trait        | Purpose                                          |
 | ------------ | ------------------------------------------------ |
@@ -202,7 +202,7 @@ fn requires_send<T: Send>(item: T) {
 | `Drop`       | Defines behavior when a value goes out of scope. |
 # Trait Bounds
 Trait bounds allow you to use traits as constraints on generic types, ensuring that types used in generic code have specific behavior.
-## **1. Trait Bounds**
+## 1. Trait Bounds
 Trait bounds are used to constrain generic types, ensuring they implement specific traits.
 **Basic Syntax**:
 ```rust
@@ -244,7 +244,7 @@ fn main() {
     animal_speak(cat); // Meow!
 }
 ```
-## **2. Advanced Syntax for Trait Bounds**
+## 2. Advanced Syntax for Trait Bounds
 #### Using the `where` Clause
 For complex bounds, use `where` for better readability.
 ```rust
@@ -261,7 +261,130 @@ fn process<T: Trait1 + Trait2>(item: T) {
     // Item must implement both Trait1 and Trait2
 }
 ```
-# **Key Points**
+## Relaxed Trait Bounds
+In Rust, **widening bounds** refers to a scenario where a more _general_ trait or type bound is used instead of a more _specific_ one. This concept becomes important in the context of **generics**, **trait bounds**, and **type inference**.
+
+Widening bounds can influence how flexible and reusable code is, as it allows functions, structs, or implementations to operate on a broader range of types.
+
+Trait bounds in Rust define constraints on a generic type. For example:
+```rust
+fn print<T: std::fmt::Display>(value: T) {
+    println!("{}", value);
+}
+```
+Here, `T` is a generic type constrained by the `std::fmt::Display` trait, meaning `print` can only accept types that implement `Display`.
+## What Is Widening Bounds?
+Widening bounds refers to relaxing the constraints on a type or trait, making it more general. Instead of requiring a specific trait, you allow any type that satisfies a broader trait or set of traits.
+Example of Widening Bounds:
+### 1. Narrow Bound:
+```rust
+fn process<T: std::fmt::Display>(value: T) {
+    println!("{}", value);
+}
+```
+- This function requires `T` to implement `Display`.
+- You can only pass types like `i32`, `String`, or any other type that implements `Display`.
+### 2. Widened Bound:
+```rust
+fn process<T: std::fmt::Debug>(value: T) {
+    println!("{:?}", value);
+}
+```
+- Here, the bound is widened to `Debug`, which is more general than `Display`.
+- All types that implement `Display` also implement `Debug`, but many types implement `Debug` without implementing `Display`.
+By widening the bound, the function can now accept more types (e.g., raw structs that derive `Debug` but not `Display`).
+### When to Use Widening Bounds
+1. **Generalizing Functionality**: If your function doesn't require the full functionality of a specific trait, you can widen the bound to a more general one. For example, use `Debug` if you're only printing debug information, rather than requiring `Display`.
+2. **Making Code More Flexible**: Widening bounds makes your code work with more types. This can be useful in library design, where you want to maximize usability.
+3. **Avoiding Over-constraining**: Narrowing bounds unnecessarily restricts the types that can be used, potentially making the code harder to reuse or less ergonomic.
+## Widening Bounds in Trait Implementations
+You can use widening bounds to define more general implementations for traits.
+**Example**:
+```rust
+trait MyTrait {
+    fn process(&self);
+}
+
+// Narrow bound: Only `Display` types can use this implementation
+impl<T: std::fmt::Display> MyTrait for T {
+    fn process(&self) {
+        println!("Display: {}", self);
+    }
+}
+
+// Widened bound: Any `Debug` type can use this implementation
+impl<T: std::fmt::Debug> MyTrait for T {
+    fn process(&self) {
+        println!("Debug: {:?}", self);
+    }
+}
+```
+Here, types that implement both `Display` and `Debug` will use the first implementation due to specialization rules, while `Debug`-only types will use the second.
+### Examples
+#### 1. `?Sized` 
+The `?Sized` bound in Rust is a special trait bound used to handle types that may or may not have a known size at compile time. By default, all types in Rust are assumed to be **`Sized`**, meaning their size is known at compile time. The `?Sized` bound allows working with types whose size is not known (e.g., dynamically sized types like `str` or `[T]`).
+- When you use `?Sized` as a bound, you are explicitly allowing the possibility of dealing with unsized types. This is common when you work with **generic code**, **trait objects**, or **references**.
+##### Default Behavior Without `?Sized`
+By default, Rust assumes types are `Sized` unless you explicitly opt out with `?Sized`. For example:
+```rust
+struct MyStruct<T> {
+    value: T, // Compiler assumes T: Sized by default
+}
+```
+Here, `T` must implement `Sized` because the size of `MyStruct<T>` must be known at compile time.
+##### When and How to Use `?Sized`
+###### 1. Generic Structs or Functions
+If you want to allow unsized types, you can add the `?Sized` bound explicitly:
+```rust
+struct MyStruct<T: ?Sized> {
+    value: Box<T>, // Box<T> allows storing dynamically sized types
+}
+```
+This enables `MyStruct` to store both sized types (e.g., `i32`) and unsized types (e.g., `str`).
+Example:
+```rust
+let s: MyStruct<str> = MyStruct {
+    value: Box::from("hello"),
+};
+```
+##### 2. Trait Objects
+Trait objects like `dyn Trait` are unsized because their size depends on the underlying implementation. Using `?Sized` allows handling them generically:
+```rust
+fn use_trait_object<T: ?Sized + std::fmt::Debug>(value: &T) {
+    println!("{:?}", value);
+}
+
+let value: &dyn std::fmt::Debug = &42; // Trait object
+use_trait_object(value); // Works because of ?Sized
+```
+#### 2. Widening from `Copy` to `Clone`
+The `Copy` trait is more restrictive than the `Clone` trait. By widening a bound from `Copy` to `Clone`, you allow types that can be cloned but not copied.
+```rust
+fn use_copy<T: Copy>(x: T) {
+    let y = x; // Copy is required
+}
+
+fn use_clone<T: Clone>(x: T) {
+    let y = x.clone(); // Only Clone is required
+}
+```
+- `Copy` types like `i32` or `bool` work in both functions.
+- `Clone`-only types like `String` work in `use_clone` but not in `use_copy`.
+#### 3. Widening from `PartialOrd` to `Ord`
+`Ord` is a stricter trait than `PartialOrd`. Widening the bound to `PartialOrd` allows types that can only be compared partially.
+```rust
+fn strict_sort<T: Ord>(list: &mut [T]) {
+    list.sort();
+}
+
+fn general_sort<T: PartialOrd>(list: &mut [T]) {
+    list.sort_by(|a, b| a.partial_cmp(b).unwrap());
+}
+```
+- `strict_sort` works only for types like `i32` or `String`, which implement `Ord`.
+- `general_sort` works for floating-point numbers (`f32`, `f64`), which implement `PartialOrd` but not `Ord`.
+---
+## Key Points
 1. Traits are like interfaces that define shared behavior.
 2. Trait bounds constrain generic types to ensure required behavior.
 3. Traits can have default method implementations.
@@ -302,8 +425,8 @@ fn main() {
 Here:
 - `Box<dyn Animal>` is a **trait object** that can store any type implementing the `Animal` trait.
 - The exact type (`Dog` or `Cat`) is determined at runtime.
-## **2. Dispatch Mechanisms**
-### **Static Dispatch**
+## 2. Dispatch Mechanisms
+### Static Dispatch
 - The specific implementation of a trait is determined at compile time.
 - Rust generates separate code for each concrete type.
 - **Zero runtime overhead** since the compiler directly embeds the correct implementation into the executable.
@@ -342,7 +465,7 @@ fn main() {
 ```
 Here:
 - The function `make_speak` generates separate implementations for `Dog` and `Cat` at compile time.
-### **Dynamic Dispatch**
+### Dynamic Dispatch
 - The specific implementation of a trait is determined at runtime.
 - Used with **trait objects**.
 - Introduces a **small runtime overhead** due to an indirect function call (via a virtual table, or vtable).
@@ -381,7 +504,7 @@ fn main() {
 ```
 Here:
 - `&dyn Speak` is a **trait object**, and the method call is resolved at runtime.
-## **3. Differences Between Static and Dynamic Dispatch**
+## 3. Differences Between Static and Dynamic Dispatch
 
 |**Feature**|**Static Dispatch**|**Dynamic Dispatch**|
 |---|---|---|
@@ -389,13 +512,13 @@ Here:
 |**Performance**|Zero overhead|Small runtime cost due to vtable lookup|
 |**Flexibility**|Requires concrete types at compile time|Supports polymorphism across different types|
 |**Usage**|Generics (`T: Trait`)|Trait objects (`&dyn Trait`, `Box<dyn Trait`)|
-## **4. How Dynamic Dispatch Works (Vtable)**
+## 4. How Dynamic Dispatch Works (Vtable)
 - A **vtable** (virtual table) is created for each trait that contains pointers to the methods for a specific type.
 - When you call a method on a trait object, Rust uses the vtable to look up the appropriate function pointer and call it.
 #### Example:
 1. If you create a `Box<dyn Animal>` for a `Dog`, Rust creates a vtable for the `Animal` trait as implemented by `Dog`.
 2. When calling `speak`, Rust uses the vtable to find the `Dog::speak` implementation at runtime.
-## **5. When to Use Static Dispatch vs. Dynamic Dispatch**
+## 5. When to Use Static Dispatch vs. Dynamic Dispatch
 
 |**Scenario**|**Use**|
 |---|---|
@@ -404,7 +527,7 @@ Here:
 |Need polymorphism across different types|**Dynamic Dispatch**|
 |Code with heterogeneous collections|**Dynamic Dispatch**|
 |Traits with many implementors and evolving APIs|**Dynamic Dispatch**|
-## **6. Combining Static and Dynamic Dispatch**
+## 6. Combining Static and Dynamic Dispatch
 You can mix both approaches in your programs. Use static dispatch where performance matters and dynamic dispatch where flexibility is required.
 #### Example
 ```rust
@@ -444,22 +567,22 @@ fn main() {
     dynamic_dispatch(&cat);       // Runtime dispatch
 }
 ```
-## **7. Advantages and Disadvantages**
-#### **Static Dispatch**
+## 7. Advantages and Disadvantages
+#### Static Dispatch
 - **Pros**:
     - Zero runtime overhead.
     - Inline optimizations by the compiler.
 - **Cons**:
     - Code size increases due to monomorphization.
     - Requires all types to be known at compile time.
-#### **Dynamic Dispatch**
+#### Dynamic Dispatch
 - **Pros**:
     - Allows polymorphism with multiple types.
     - Enables heterogeneous collections (e.g., `Vec<Box<dyn Trait>>`).
 - **Cons**:
     - Small runtime cost due to vtable lookup.
     - Cannot use methods not specified in the trait.
-## **8. Example: Heterogeneous Collection with Trait Objects**
+## 8. Example: Heterogeneous Collection with Trait Objects
 A common use case for dynamic dispatch is creating collections with elements of different types implementing the same trait.
 ```rust
 trait Animal {
@@ -492,7 +615,7 @@ fn main() {
 Here:
 - `Vec<Box<dyn Animal>>` is a collection of heterogeneous types (`Dog` and `Cat`).
 - `speak` is dynamically dispatched for each element in the vector.
-### **Key Takeaways**
+### Key Takeaways
 1. **Trait Objects**:
     - Enable runtime polymorphism using `dyn Trait`.
     - Commonly used for dynamic dispatch and heterogeneous collections.
@@ -664,7 +787,7 @@ fn serialize<T: Serialize>(data: T) {
 - **Marker Traits** (like `Sized` or custom traits) are lightweight tools to signal properties about types.
 - Both are powerful tools in Rust's type system, enabling fine-grained control over type safety and behavior.
 ---
-# **Associated Types in Rust**
+# Associated Types in Rust
 **Associated types** in Rust are a way to define type placeholders directly within a trait. These types act as "output types" or "type aliases" that implementer of the trait must specify. They provide a concise way to associate a type with a trait, especially when working with complex traits or constraints.
 ## 1. Syntax of Associated Types
 An associated type is declared using the `type` keyword within a trait definition.
@@ -690,7 +813,7 @@ impl Iterator for Counter {
     }
 }
 ```
-## **2. Key Differences Between Associated Types and Generics**
+## 2. Key Differences Between Associated Types and Generics
 
 | Feature                 | Associated Types                                 | Generics                                                     |
 | ----------------------- | ------------------------------------------------ | ------------------------------------------------------------ |
@@ -698,7 +821,7 @@ impl Iterator for Counter {
 | **Ease of Use**         | Cleaner syntax for traits with one "output" type | Flexible for multiple independent type parameters            |
 | **Use Case**            | Suitable when a single output type is expected   | Suitable for general-purpose type relationships              |
 | **Constraint Behavior** | Tightly bound to the trait                       | Can have independent constraints and multiple type params    |
-## **3. Practical Differences**
+## 3. Practical Differences
 ### Associated Types: Cleaner Syntax
 Associated types make traits easier to use and read when only one type needs to be specified.
 **Example**:
@@ -787,7 +910,7 @@ impl Summable<f64> for Adder {
     }
 }
 ```
-## **4. When to Use Associated Types**
+## 4. When to Use Associated Types
 1. **Single Output Type**:
 - When a trait has a single associated type that implementers must define, associated types make the API cleaner.
 **Example**: `Iterator` in the Rust standard library:
@@ -801,7 +924,7 @@ pub trait Iterator {
 - Every type implementing `Iterator` specifies what `Item` it works with.
 2. **Tightly Coupled Types**:
 - Use associated types when the type is inherently tied to the trait itself and doesn’t need to be specified explicitly.
-## **5. Advanced Features with Associated Types**
+## 5. Advanced Features with Associated Types
 ### Using Associated Types in Trait Bounds
 You can use associated types in bounds to constrain generic functions.
 **Example**:
@@ -861,7 +984,7 @@ trait Grandparent {
     type Grandchild: Parent;
 }
 ```
-## **6. Key Advantages of Associated Types**
+## 6. Key Advantages of Associated Types
 1. **Cleaner Syntax**:
     - Avoids repeating type parameters like `Trait<T>` in every use case.
     - Makes code more readable.
@@ -869,13 +992,13 @@ trait Grandparent {
     - Associated types allow implementers to specify exactly one type for the trait, avoiding the need for flexibility that generics provide.
 3. **Encapsulation**:
     - Associated types are tightly coupled with the trait, ensuring they are always defined in the context of the trait.
-## **7. When to Use Generics Instead**
+## 7. When to Use Generics Instead
 - Use generics when:
     - You need multiple type parameters.
     - You want the caller to decide the type.
     - Types can vary independently of the **same** trait implementation. \[IMPORTANT\]
     - When we want multiple implementation of a trait for a type.
-## **8. Practical Examples**
+## 8. Practical Examples
 ### Rust Standard Library Example: `Iterator`
 ```rust
 pub trait Iterator {
@@ -923,7 +1046,7 @@ impl Add for Point {
     }
 }
 ```
-## **Key Takeaways**
+## Key Takeaways
 1. **Associated Types**:
     - Provide a way to define type placeholders within a trait.
     - Bind a single type to a trait implementation, simplifying the API.
