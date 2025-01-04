@@ -426,14 +426,17 @@ fn main() {
 ```
 By nesting the unsized fields inside their own structs, you can manage multiple unsized fields while keeping the top-level struct usable.
 # Unsized coercion
+
 **Unsized coercion** refers to the automatic conversion of a type with a known size at compile time (a "sized type") to a type without a known size at compile time (an "unsized type"). This feature is most commonly used in Rust with dynamically sized types (**DSTs**) like slices (`[T]`), string slices (`str`), and trait objects (`dyn Trait`).
+> [!info]
+> It is related to deref coercion [[Ownership & Borrowing#4. Deref Coercion]]
 ## What is Unsized Coercion?
-Unsized coercion allows Rust to automatically convert a sized type into a reference or pointer to an unsized type. This conversion is **lossless**, as the unsized type is always accompanied by metadata (e.g., the length of a slice or the vtable for a trait object) to ensure it can be used safely.
+Unsized coercion allows Rust to automatically convert a sized type into a **reference or pointer to an unsized type**. This conversion is **lossless**, as the unsized type is always accompanied by metadata (e.g., the length of a slice or the vtable for a trait object) to ensure it can be used safely.
 ### Key Properties
 1. Unsized coercion only works when the source type "dynamically dereferences" into the target type.
 2. The result of coercion must be a pointer or reference type (`&`, `&mut`, `Box`, `Rc`, etc.).
 3. The coercion is implicit and happens automatically in certain contexts, like function arguments or when assigning values.
-### Common Cases of Unsized Coercion
+## Common Cases of Unsized Coercion
 1. **From Arrays to Slices (`[T; N]` → `[T]`)**
     - A fixed-size array (`[T; N]`) can be coerced into a slice (`[T]`) because slices are a dynamically sized view into a contiguous sequence of elements.
 ```rust
@@ -450,7 +453,7 @@ fn main() {
 ```
 - The compiler automatically converts `&[i32; 3]` into `&[i32]`, carrying the length of the array as metadata.
 2. **From `String` to `str`**
-    - The `String` type is a heap-allocated, growable string, whereas `str` is an unsized string slice. You can coerce `&String` to `&str`.
+    - The `String` type is a heap-allocated, grow-able string, whereas `str` is an unsized string slice. You can coerce `&String` to `&str`.
     - The coercion works because `String` implements `Deref<Target = str>`.
 ```rust
 fn greet(name: &str) {
@@ -462,7 +465,6 @@ fn main() {
     greet(&name); // Coerces &String into &str
 }
 ```
-	
 3. **From Structs with Unsized Fields**
     - A struct with its last field as an unsized type can coerce into a reference to an unsized version of the struct.
     - Here, the coercion happens because the struct's last field is dynamically sized.
@@ -478,3 +480,61 @@ fn main() {
 ```
 4. **From Concrete Types to Trait Objects (`T` → `dyn Trait`)**
     - A type implementing a trait can be coerced into a reference to the corresponding trait object (`dyn Trait`).
+    - This coercion works because `dyn Trait` includes a vtable to enable dynamic dispatch.
+```rust
+trait Speak {
+    fn speak(&self);
+}
+
+struct Dog;
+
+impl Speak for Dog {
+    fn speak(&self) {
+        println!("Woof!");
+    }
+}
+
+fn make_speak(speaker: &dyn Speak) {
+    speaker.speak();
+}
+
+fn main() {
+    let dog = Dog;
+    make_speak(&dog); // Coerces &Dog into &dyn Speak
+}
+```
+## When Does Unsized Coercion Happen?
+1. **Function Arguments** When a function expects a reference to an unsized type, unsized coercion is applied automatically.
+```rust
+fn process(slice: &[i32]) { /* ... */ }
+
+let arr = [1, 2, 3];
+process(&arr); // Coerces &[i32; 3] into &[i32]
+```
+2. **Assignments** When assigning a reference or pointer to an unsized type.
+```rust
+let s: &str = &String::from("hello"); // Coerces &String into &str
+```
+3. **Trait Objects** When a reference or pointer to a concrete type is assigned to a variable of type `dyn Trait`.
+```rust
+let obj: &dyn Speak = &Dog; // Coerces &Dog into &dyn Speak
+```
+4. **Return Values** When a function returns a reference or pointer to an unsized type.
+```rust
+fn get_slice(arr: &[i32; 3]) -> &[i32] {
+    arr // Coerces &[i32; 3] into &[i32]
+}
+```
+## Constraints
+1. **Works Only for Reference or Pointer Types** Unsized coercion cannot convert values directly—only references or pointers to them. For example:
+2. **The Target Type Must Be a DST** The target type must be unsized (e.g., `str`, `[T]`, `dyn Trait`).
+3. **Requires Metadata** The unsized type must have metadata (e.g., length for slices, vtables for trait objects). If no metadata is available, coercion is not possible.
+### Why is Unsized Coercion Useful?
+- **Ergonomics**: Reduces the need for explicit conversions between sized and unsized types.
+- **Compatibility**: Allows functions and data structures to work seamlessly with dynamically sized data (e.g., slices, trait objects).
+- **Dynamic Behavior**: Enables dynamic dispatch with trait objects (`dyn Trait`), allowing polymorphism at runtime.
+### Key Takeaways
+- **Unsized coercion** allows conversion from a sized type to a reference or pointer to an unsized type.
+- Common cases include coercing arrays to slices (`[T; N] → [T]`), strings to string slices (`String → str`), and concrete types to trait objects (`T → dyn Trait`).
+- It requires metadata, which is carried along with the reference or pointer.
+- It works implicitly in contexts like function arguments, assignments, and trait object usage.

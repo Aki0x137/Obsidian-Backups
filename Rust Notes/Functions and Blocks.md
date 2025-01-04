@@ -183,7 +183,7 @@ fn handle_error(error: MyError) -> ! {
 ---
 ### Diverging Functions
 A **diverging function** in Rust is a special kind of function that never returns to the caller. Instead of having a return type like `i32` or `()`, diverging functions are declared with the return type `!` (pronounced "never").
-#### **Key Characteristics of Diverging Functions**
+#### Key Characteristics of Diverging Functions
 1. **Never Return**:
     - These functions either loop indefinitely, terminate the program, or cause the thread to panic.
 2. **Return Type `!`**:
@@ -192,7 +192,6 @@ A **diverging function** in Rust is a special kind of function that never return
     - Error handling (`panic!`).
     - Infinite loops.
     - Abnormal termination of the program.
-   
 #### Use Cases for Diverging Functions
 1. **Error Handling**: Diverging functions like `panic!` are used for unrecoverable errors.
 ```rust
@@ -225,7 +224,7 @@ fn exit_on_error() -> ! {
     std::process::exit(1);
 }
 ```
-### **Behavior in Control Flow**
+### Behavior in Control Flow
 Because diverging functions never return, they can be used in places where a function is expected to "end" a control flow branch.
 ```rust
 fn handle_input(input: Option<&str>) {
@@ -237,7 +236,7 @@ fn handle_input(input: Option<&str>) {
 ```
 
 ---
-# **Blocks**
+# Blocks
 A block is a group of statements enclosed in `{}`. Blocks are used in various places, such as functions, control structures, and standalone expressions.
 ```rust
 fn main() {
@@ -304,7 +303,7 @@ fn main() {
     println!("{}", result); // Other
 }
 ```
-### **Ownership Transfer in Blocks**:
+### Ownership Transfer in Blocks:
 Ownership rules apply to variables declared inside blocks.
 ```rust
 fn main() {
