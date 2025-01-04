@@ -405,7 +405,6 @@ Here:
 |Code with heterogeneous collections|**Dynamic Dispatch**|
 |Traits with many implementors and evolving APIs|**Dynamic Dispatch**|
 ## **6. Combining Static and Dynamic Dispatch**
-
 You can mix both approaches in your programs. Use static dispatch where performance matters and dynamic dispatch where flexibility is required.
 #### Example
 ```rust
@@ -505,9 +504,53 @@ Here:
     - Resolves methods at runtime using vtables.
     - Achieved with trait objects (`&dyn Trait`, `Box<dyn Trait>`).
     - Ideal for flexible, polymorphic behavior.
+# Auto Traits and Market Traits
+In Rust, **auto traits** and **marker traits** are special kinds of traits that provide additional metadata about types but generally do not define any methods or behaviors. Instead, they are used to signal properties of a type or enable specific behaviors at compile time.
+## 1. Auto Traits
+Auto traits are traits that the Rust compiler automatically implements for types if certain conditions are met. These traits are a special category used mainly to enforce properties related to **ownership**, **concurrency**, and **memory safety**.
+### Common Auto Traits
+1. **`Send`**
+    - Indicates that a type is safe to transfer between threads.
+    - Automatically implemented for types composed entirely of `Send` types.
+    - Example: `i32` is `Send`, but raw pointers (`*const T`) are not.
+2. **`Sync`**
+    - Indicates that a type is safe to access from multiple threads concurrently.
+    - Automatically implemented for types composed entirely of `Sync` types.
+    - Example: `&T` is `Sync` if `T` is `Send`.
+3. **`Unpin`**
+    - Indicates that a type can be safely moved in memory even after being pinned.
+    - All types are `Unpin` by default unless explicitly opted out (e.g., via `std::marker::PhantomPinned`).
+## Key Properties of Auto Traits
+1. **Compiler-Provided Implementation**
+    - Auto traits are automatically implemented for types unless they contain non-auto traits.
+    - Example: A struct containing a `Rc<T>` will not implement `Send` because `Rc<T>` is not thread-safe.
+2. **Customization with `!Trait`**
+    - You can explicitly opt out of an auto trait for a custom type using the `!` syntax.
+```rust
+struct MyNonSendType {
+    data: *const i32, // Raw pointers are not `Send`
+}
+unsafe impl !Send for MyNonSendType {}
+```
+3. **Used in `impl` Blocks**
+	- Auto traits are often used with `+` in trait bounds to restrict generics.
+```rust
+fn parallel_execute<T>(data: T)
+where
+    T: Send + 'static, // T must be Send and have a static lifetime
+{
+    // Function body
+}
+```
+## Practical Use Cases of Auto Traits
+1. **Concurrency**
+    - `Send` and `Sync` are essential for multithreading. For example:
+        - A `Mutex<T>` can only be shared between threads if `T` is `Send` and `Sync`.
+2. **Pinning**
+    - `Unpin` is crucial when working with `Pin<T>` (e.g., for async programming).
 # **Associated Types in Rust**
 **Associated types** in Rust are a way to define type placeholders directly within a trait. These types act as "output types" or "type aliases" that implementer of the trait must specify. They provide a concise way to associate a type with a trait, especially when working with complex traits or constraints.
-## **1. Syntax of Associated Types**
+## 1. Syntax of Associated Types
 An associated type is declared using the `type` keyword within a trait definition.
 **Example**:
 ```rust
