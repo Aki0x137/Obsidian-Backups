@@ -195,12 +195,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Abroad/MS Computer Science.md",
+                "file": "Rust Notes/Data Type Size.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "MS Computer Science"
+              "title": "Data Type Size"
             }
           }
         ],
@@ -322,10 +322,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Abroad/MS Computer Science.md"
+                "file": "Rust Notes/Data Type Size.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of MS Computer Science"
+              "title": "Outline of Data Type Size"
             }
           }
         ],
@@ -346,31 +346,33 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "01aa52feaf57f1ed",
+  "active": "6f0e6991b1cc1aed",
   "lastOpenFiles": [
-    "Abroad",
-    "Rust Notes/Smart Pointers.md",
-    "Abroad/MS Computer Science.md",
-    "Algorithmic Trading/Basics.md",
-    "Rust Notes/Lifetimes and Pointers.md",
-    "Rust Notes/Ownership & Borrowing.md",
     "Rust Notes/Rust Atomics and Memory Ordering.md",
-    "Rust Notes/Functional Programming.md",
-    "Rust Notes/Generics and Traits.md",
-    "Rust Notes/Code Organization and Visibility.md",
-    "Rust Notes/Compound Data Types.md",
-    "Rust Notes/Collections and Data Structures.md",
-    "Excalidraw/Rust-Code-Organization.md",
+    "Media/rust_collection_types.png",
     "Media/Pasted image 20240818200222.png",
     "Media/Screenshot from 2024-07-14 13-15-29.png",
     "Media/Pasted image 20240714153535.png",
-    "Excalidraw/Drawing 2024-07-14 22.10.00.excalidraw.md",
+    "Rust Notes/Data Type Size.md",
     "Rust Notes/Control Flow.md",
+    "Rust Notes/Collections and Data Structures.md",
+    "Rust Notes/Compound Data Types.md",
+    "Rust Notes/Code Organization and Visibility.md",
+    "Rust Notes/Smart Pointers.md",
+    "Rust Notes/Ownership & Borrowing.md",
+    "Rust Notes/Lifetimes and Pointers.md",
     "Rust Notes/Functions and Blocks.md",
+    "Rust Notes/Generics and Traits.md",
+    "Rust Notes/Functional Programming.md",
+    "Distributed-Systems-Cohort/SAT Solvers - An Introduction and Go Implementation.md",
+    "Abroad/MS Computer Science.md",
+    "Abroad",
+    "Algorithmic Trading/Basics.md",
+    "Excalidraw/Rust-Code-Organization.md",
+    "Excalidraw/Drawing 2024-07-14 22.10.00.excalidraw.md",
     "Go Concurrency/The `select` statement.md",
     "Algorithmic Trading",
     "Excalidraw/Parallel Computation DAG.md",
-    "Distributed-Systems-Cohort/SAT Solvers - An Introduction and Go Implementation.md",
     "Tempo/Work Notes.md",
     "Tempo",
     "Go Concurrency/Channel Ownership & Closing.md",
@@ -379,13 +381,11 @@
     "Distributed-Systems-Cohort/{Draft} Non Blocking Data Structures.md",
     "Wind-Cache-Library/Requirements.md",
     "Go Concurrency",
-    "Observability and OpenTelemetry/Observability Basics.md",
     "Observability and OpenTelemetry",
     "Excalidraw",
     "Media",
     "Distributed-Systems-Cohort",
     "Rust Notes",
-    "Wind-Cache-Library",
     "Wind-Cache-Library",
     "Untitled.canvas",
     "Wind-Cache-Docs/publish/attachments/vercel-project-id.png",
@@ -393,7 +393,6 @@
     "Wind-Cache-Docs/publish/attachments/vercel-account-id.png",
     "Wind-Cache-Docs/publish/attachments/publish-dir-yml.png",
     "Wind-Cache-Docs/publish/attachments/how-linked-blog-starter-works.png",
-    "Wind-Cache-Docs/publish/attachments/github-secrets-vercel.png",
-    "Wind-Cache-Docs/publish/attachments/fork-linked-blog-starter-md.png"
+    "Wind-Cache-Docs/publish/attachments/github-secrets-vercel.png"
   ]
 }
