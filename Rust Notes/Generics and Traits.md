@@ -513,13 +513,59 @@ Auto traits are traits that the Rust compiler automatically implements for types
     - Indicates that a type is safe to transfer between threads.
     - Automatically implemented for types composed entirely of `Send` types.
     - Example: `i32` is `Send`, but raw pointers (`*const T`) are not.
-2. **`Sync`**
+```rust
+// Auto-implemented for most types
+struct SafeToSend(i32); // Automatically implements Send
+
+// But not for raw pointers
+struct NotSend(*const i32); // Doesn't implement Send
+```
+1. **`Sync`**
     - Indicates that a type is safe to access from multiple threads concurrently.
     - Automatically implemented for types composed entirely of `Sync` types.
     - Example: `&T` is `Sync` if `T` is `Send`.
-3. **`Unpin`**
+```rust
+// Most types are both Send and Sync
+#[derive(Debug)]
+struct ThreadSafe {
+    data: i32,
+}
+
+// Rc is neither Send nor Sync
+use std::rc::Rc;
+struct NotThreadSafe {
+    data: Rc<i32>, // Makes the whole type !Send and !Sync
+```
+1. **`Unpin`**
     - Indicates that a type can be safely moved in memory even after being pinned.
     - All types are `Unpin` by default unless explicitly opted out (e.g., via `std::marker::PhantomPinned`).
+```rust
+// Most types are Unpin by default
+struct CanBeMoved(i32);
+
+// Future is !Unpin
+use std::future::Future;
+struct MyFuture(Box<dyn Future<Output = i32>>); // Not Unpin
+```
+1. **`Sized`**
+	- Indicates a type has a known size at compile time
+```rust
+// Most types are Sized
+struct Known {
+    x: i32,    // Known size: 4 bytes
+    y: bool,   // Known size: 1 byte
+}
+
+// Slices are not Sized
+struct Container {
+    data: [i32], // Error: Sized is not implemented
+}
+
+// Fix with indirection
+struct ValidContainer {
+    data: Box<[i32]>, // OK: Box has a known size
+}
+```
 ## Key Properties of Auto Traits
 1. **Compiler-Provided Implementation**
     - Auto traits are automatically implemented for types unless they contain non-auto traits.
@@ -548,6 +594,76 @@ where
         - A `Mutex<T>` can only be shared between threads if `T` is `Send` and `Sync`.
 2. **Pinning**
     - `Unpin` is crucial when working with `Pin<T>` (e.g., for async programming).
+## 2. Marker Traits
+Marker traits are traits that do not define any methods. They are used purely as labels or flags to add metadata about a type.
+### Examples of Marker Traits
+1. **`Sized`**
+	- Automatically implemented for all types with a statically known size at compile time.
+	- `Sized` is implied for all types unless explicitly opted out using a `?Sized` bound.
+	- Example:
+```rust
+fn my_function<T: ?Sized>(param: &T) {
+    // T can be unsized (e.g., `[T]`, `str`, `dyn Trait`)
+}
+```
+2. **`UnwindSafe` and `RefUnwindSafe`**
+    - Used to indicate whether a type can be safely used across unwinding (e.g., in a `catch_unwind` block).
+    - Implemented by most types automatically.
+3. **Custom Marker Traits**
+    - You can define your own marker traits to signal properties specific to your application.
+    - Example:
+```rust
+trait MyMarker {}
+
+struct MyType;
+impl MyMarker for MyType {}
+```
+### Key Properties of Marker Traits
+1. **No Methods**
+    - Marker traits do not define methods or associated items.
+2. **Custom Behavior**
+    - You can use marker traits in trait bounds to enforce constraints or implement custom logic.
+```rust
+trait MyMarker {}
+
+fn requires_marker<T: MyMarker>(value: T) {
+    println!("This type implements MyMarker!");
+}
+```
+## Auto Traits vs. Marker Traits
+
+|Feature|Auto Traits|Marker Traits|
+|---|---|---|
+|**Definition**|Automatically implemented by the compiler|Manually defined by developers|
+|**Examples**|`Send`, `Sync`, `Unpin`|`Sized`, `MyMarker`|
+|**Purpose**|Enforce ownership, concurrency, or safety properties|Signal metadata or properties|
+|**Implementation**|Compiler decides|Manual implementation|
+|**Customization**|Opt-out using `!Trait`|Full control by the developer|
+## Practical Usage
+1. **Restricting Generics**
+    - Use auto traits and marker traits in generic bounds to enforce properties.
+```rust
+fn thread_safe_function<T: Send>(value: T) {
+    // T must be Send to ensure thread safety
+}
+```
+2. **Custom Type Labeling**
+	- Use custom marker traits to define and enforce your own rules.
+```rust
+trait Serialize {}
+struct MyType;
+
+impl Serialize for MyType {}
+
+fn serialize<T: Serialize>(data: T) {
+    println!("Data serialized!");
+}
+```
+## Conclusion
+- **Auto Traits** (like `Send`, `Sync`, `Unpin`) are crucial for enforcing ownership and concurrency rules.
+- **Marker Traits** (like `Sized` or custom traits) are lightweight tools to signal properties about types.
+- Both are powerful tools in Rust's type system, enabling fine-grained control over type safety and behavior.
+---
 # **Associated Types in Rust**
 **Associated types** in Rust are a way to define type placeholders directly within a trait. These types act as "output types" or "type aliases" that implementer of the trait must specify. They provide a concise way to associate a type with a trait, especially when working with complex traits or constraints.
 ## 1. Syntax of Associated Types
@@ -576,7 +692,7 @@ impl Iterator for Counter {
 ```
 ## **2. Key Differences Between Associated Types and Generics**
 
-| **Feature**             | **Associated Types**                             | **Generics**                                                 |
+| Feature                 | Associated Types                                 | Generics                                                     |
 | ----------------------- | ------------------------------------------------ | ------------------------------------------------------------ |
 | **Definition**          | Type aliases within a trait                      | Type parameters specified when implementing or using a trait |
 | **Ease of Use**         | Cleaner syntax for traits with one "output" type | Flexible for multiple independent type parameters            |
