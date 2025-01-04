@@ -633,3 +633,120 @@ fn handle_error(error: MyError) -> ! {
 - Useful for expressing type system guarantees
 - Different from `()` (unit type) which is a normal "empty" value
 ---
+## Empty Structs
+An empty `struct` with no fields is a ZST.
+```rust
+struct Empty;
+
+fn main() {
+    let a = Empty;
+    let b = Empty;
+    println!("Empty structs: {:?}, {:?}", a, b);
+}
+```
+- `Empty` takes up **0 bytes** of memory, no matter how many instances are created.
+### Practical Use Cases of Unit Structs as Markers
+ZSTs are often used as **marker types** to indicate a property of a type or enable compile-time checks.
+```rust
+struct Safe;
+struct Unsafe;
+
+fn do_work<T>(_marker: T) where T: Send {
+    println!("Work is safe to perform!");
+}
+
+fn main() {
+    do_work(Safe); // Marker struct indicating "safe" work
+}
+```
+##  Unit Type `()`
+The `()` type is a built-in ZST in Rust, often used to indicate the absence of a meaningful value (similar to `void` in other languages).
+```rust
+fn main() {
+    let x: () = ();
+    println!("Size of unit type: {}", std::mem::size_of::<()>()); // 0
+}
+```
+- `()` is commonly used as the return type of functions that do not return a value.
+### Unit Type for Void-like Behavior
+Functions that don’t return a value use the unit type `()` as their return type. This is also common in closures or iterators.
+```rust
+let result: () = ();
+```
+## `PhantomData` type
+`PhantomData` is a marker type in Rust used in generics to indicate that a type has some relationship with another type without storing any actual data.
+```rust
+use std::marker::PhantomData;
+
+struct MyType<T> {
+    _marker: PhantomData<T>,
+}
+
+fn main() {
+    let _value: MyType<i32> = MyType { _marker: PhantomData };
+    println!("Size of MyType<i32>: {}", std::mem::size_of::<MyType<i32>>()); // 0
+}
+```
+- `PhantomData` allows you to express ownership or lifetimes of types in generics without incurring runtime overhead.
+### Practical Use Cases of PhantomData for Type Safety
+Used in generics to indicate ownership or lifetimes without storing data.
+```rust
+use std::marker::PhantomData;
+
+struct MyWrapper<'a, T> {
+    value: i32,
+    _marker: PhantomData<&'a T>, // Adds lifetime relation without storage
+}
+
+fn main() {
+    let _wrapper = MyWrapper::<i32> {
+        value: 42,
+        _marker: PhantomData,
+    };
+}
+```
+## Empty Enums
+An enum with no variants is a ZST.
+```rust
+enum Never {}
+
+fn main() {
+    println!("Size of empty enum: {}", std::mem::size_of::<Never>()); // 0
+}
+```
+- Empty enums are often used in advanced type-level programming or to represent types that can never be instantiated.
+### Empty Enums for Impossible States
+An empty enum (`enum Never {}`) can represent a type that can never be instantiated, often used in APIs to indicate unreachable code or impossible scenarios.
+```rust
+enum Never {}
+
+fn never_returns() -> Never {
+    panic!("This will never happen!");
+}
+```
+## Zero-Sized Arrays
+An array with 0 elements is a ZST.
+```rust
+fn main() {
+    let arr: [u8; 0] = [];
+    println!("Size of empty array: {}", std::mem::size_of::<[u8; 0]>()); // 0
+}
+```
+## ZST Optimization by the Compiler
+The Rust compiler leverages ZSTs to optimize runtime performance:
+- ZSTs do not allocate memory, making them efficient to use as markers or placeholders.
+- Operations involving ZSTs (creation, copying, moving) are essentially free since no runtime work is required.
+## Summary
+1. **Zero-Sized Types (ZSTs)**:
+    - Types with no runtime memory footprint.
+    - Examples: `()`, `PhantomData`, empty structs, empty enums, and zero-length arrays.
+2. **Use Cases**:
+    - Marker types for compile-time checks.
+    - Ownership and lifetime tracking (e.g., `PhantomData`).
+    - Representation of "impossible" states (e.g., empty enums).
+    - As placeholders for generic types.
+3. **Properties**:
+    - Do not consume runtime memory.
+    - Useful for static analysis and type safety.
+    - Automatically optimized by the compiler for performance.
+
