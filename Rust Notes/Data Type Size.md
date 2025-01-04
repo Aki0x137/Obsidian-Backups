@@ -227,5 +227,95 @@ let items: Vec<Box<dyn MyTrait>> = vec![Box::new(MyStruct)];
 - Fat pointers combine a data pointer and metadata to safely manage dynamic sizes or polymorphism.
 - You can use shared references, mutable references, heap pointers (`Box`), or reference counting (`Rc`, `Arc`) to handle unsized types.
 - They are crucial for working with dynamically sized data (e.g., slices, trait objects) or implementing polymorphism.
+# `?Sized`
+[[Generics and Traits#1. `?Sized`]]
+# Structs and unsized fields
+In Rust, **structs have specific limitations when dealing with unsized fields**, primarily due to how memory layout and size computation work. Since Rust relies heavily on knowing the size of types at compile time for memory allocation, unsized fields introduce unique constraints.
+## Key Rules and Limitations for Struct Fields with Unsized Types
 
+### 1. Only One unsized field
+- A struct can only have one unsized field.
+- Structs cannot contain more than one unsized field. Since only the last field of a struct can be unsized, this naturally limits the number of unsized fields to one.
+```rust
+struct Invalid<T: ?Sized, U: ?Sized> {
+    field1: T, // Error: Only one unsized field is allowed.
+    field2: U,
+}
+```
+### 2. Unsized Fields Must Be the Last Field
+- It must be the **last field** of the struct. This ensures that the compiler can compute the offset of all other fields in the struct.
+**Why?**
+- Structs in Rust have a fixed size at compile time, except for their last field if it's unsized. The size of earlier fields must be known to calculate offsets for accessing those fields.
+```rust
+struct Valid<T: ?Sized> {
+    fixed: i32,
+    dynamic: T, // This is valid because it's the last field.
+}
 
+struct Invalid<T: ?Sized> {
+    dynamic: T, // Error: Unsized field cannot be in the middle.
+    fixed: i32,
+}
+```
+### 3. Unsized Fields Must Be Behind a Pointer
+- Unsized types cannot exist directly in a struct unless they are **behind a pointer type** like `Box`, `Rc`, or `Arc`. This is because unsized types themselves lack a concrete size at compile time.
+**Why?**
+- Without a pointer, the memory layout and size of the struct cannot be determined.
+```rust
+struct Valid<T: ?Sized> {
+    fixed: i32,
+    dynamic: Box<T>, // Valid because T is behind a pointer.
+}
+
+struct Invalid<T: ?Sized> {
+    dynamic: T, // Error: Unsized field must be behind a pointer.
+}
+```
+### 4. Structs with Unsized Fields Are Dynamically Sized
+- If a struct has an unsized field, the struct itself becomes **dynamically sized** (`!Sized`). Such structs cannot be used directly but must also be placed behind a pointer, such as `&`, `Box`, or `Rc`.
+**Example**:
+```rust
+struct Container<T: ?Sized> {
+    value: T,
+}
+
+// Error: Cannot create a dynamically sized struct directly.
+let container = Container { value: "hello" };
+
+// Correct: Place it behind a pointer like Box.
+let container = Box::new(Container { value: "hello" });
+```
+## Memory Layout of Structs with Unsized Fields
+For structs with unsized fields, the compiler stores metadata (e.g., the length of a slice or the vtable for a trait object) alongside the pointer to manage the unsized field.
+**Example**: Struct with a Slice
+```rust
+struct SliceHolder<T: ?Sized> {
+    length: usize,
+    data: [T],
+}
+
+// Usage
+let data: &[u8] = &[1, 2, 3];
+let holder = SliceHolder {
+    length: data.len(),
+    data: *data, // This is invalid without a pointer.
+};
+```
+To fix this, you need to place the unsized field behind a pointer:
+```rust
+struct SliceHolder<T: ?Sized> {
+    length: usize,
+    data: Box<[T]>, // Unsized slice field behind a pointer.
+}
+
+let data: &[u8] = &[1, 2, 3];
+let holder = SliceHolder {
+    length: data.len(),
+    data: data.into(), // Convert to Box<[T]>
+};
+```
+### Special Cases with Trait Objects
+
+#### Structs with `dyn Trait` Fields
+
+- Trait objects (`dyn Trait`) are inherently unsized, so they must also be the last field and placed behind a pointer:
