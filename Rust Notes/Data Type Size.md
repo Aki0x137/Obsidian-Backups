@@ -538,3 +538,98 @@ fn get_slice(arr: &[i32; 3]) -> &[i32] {
 - Common cases include coercing arrays to slices (`[T; N] → [T]`), strings to string slices (`String → str`), and concrete types to trait objects (`T → dyn Trait`).
 - It requires metadata, which is carried along with the reference or pointer.
 - It works implicitly in contexts like function arguments, assignments, and trait object usage.
+
+# Zero sized Types
+A Zero-Sized Type (ZST) is a type in Rust that occupies no memory at runtime because it does not contain any data that requires storage. These types are used primarily for compile-time purposes, such as type-level computations, markers, or as placeholders. ZSTs contribute to Rust's efficiency by ensuring that types with no data incur no runtime overhead.
+### Characteristics of ZSTs
+1. **No Runtime Storage**:
+    - ZSTs take up 0 bytes of memory at runtime. This means they do not allocate space in memory for their values.
+    - Even if you have multiple instances of a ZST, they will not increase the program's memory usage.
+2. **Alignment**:
+    - ZSTs have an alignment requirement, but they don't occupy memory. For example, a `struct` containing only ZSTs may still have padding if combined with other fields to maintain alignment.
+3. **Compile-Time Information**:
+    - ZSTs often encode information needed at compile time (e.g., type parameters or markers).
+4. **Efficient Handling**:
+    - Creating, copying, or moving ZSTs is a **no-op** (no actual operation is performed).
+## The `!` Type
+The `!` type is unique in Rust and represents the **never type**, which means "this function does not return." It is a "bottom type" in Rust's type system and can be coerced into any other type.
+This makes the `!` type fundamental to Rust's type system in dealing with divergent behavior, such as errors, infinite loops, or unreachable code.
+### Characteristics of the `!` Type
+1. **Non-returning Behavior**:
+    - A value of type `!` never exists, and functions or expressions with this type will never return control to the caller.
+2. **Bottom Type**:
+    - `!` is a **bottom type**, meaning it can be coerced into any other type. This allows it to integrate seamlessly into code where different types are expected.
+3. **Used for Diverging Functions**:
+    - Functions or expressions that never produce a value are assigned the `!` type.
+### Type Coercion with `!`
+The `!` type can be coerced into any other type because it represents a value that **never exists**. This makes it useful in control flow, especially with constructs like `match`.
+```rust
+fn process_input(input: Option<&str>) -> i32 {
+    match input {
+        Some(value) => value.len() as i32,
+        None => panic!("Input is required!"), // `panic!` returns `!`, coercing to `i32`
+    }
+}
+
+fn process_number(n: i32) -> Option<i32> {
+    if n < 0 {
+        return None;
+    }
+    
+    let result = match n {
+        0 => panic!("Zero not allowed"), // ! coerces to Option<i32>
+        n => Some(n * 2),
+    };
+    result
+}
+
+```
+### `!` in Expressions
+Blocks or expressions that end in a diverging function will have the type `!`.
+```rust
+fn example() -> i32 {
+    let x: i32 = {
+        panic!("This will panic and never return!");
+    }; // The `panic!` call makes the block have type `!`, which is coerced to `i32`.
+}
+```
+### ### **`!` and Unreachable Code**
+Rust provides the `unreachable!` macro, which acts as a placeholder for code that should never execute. The macro has a return type of `!`.
+```rust
+fn process_number(n: i32) -> i32 {
+    match n {
+        1 => 10,
+        2 => 20,
+        _ => unreachable!("Unexpected number!"), // `unreachable!` has type `!`
+    }
+}
+```
+
+### Error Handling
+```rust
+fn critical_operation() -> Result<(), !> {
+    // Operation that can't fail
+    Ok(())
+}
+
+// Using with custom error types
+enum MyError {
+    Fatal(String),
+    Recoverable(i32),
+}
+
+fn handle_error(error: MyError) -> ! {
+    match error {
+        MyError::Fatal(msg) => panic!("Fatal error: {}", msg),
+        MyError::Recoverable(_) => unreachable!("Should be handled elsewhere"),
+    }
+}
+```
+### Key Points
+- `!` represents computations that never produce a value
+- Can coerce into any other type
+- Common in error handling and program control flow
+- Used with `panic!`, `unreachable!`, `continue`, `break`, etc.
+- Useful for expressing type system guarantees
+- Different from `()` (unit type) which is a normal "empty" value
+---

@@ -195,12 +195,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Rust Notes/Functions and Blocks.md",
+                "file": "Rust Notes/Data Type Size.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Functions and Blocks"
+              "title": "Data Type Size"
             }
           }
         ],
@@ -322,10 +322,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Rust Notes/Functions and Blocks.md"
+                "file": "Rust Notes/Data Type Size.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Functions and Blocks"
+              "title": "Outline of Data Type Size"
             }
           }
         ],
@@ -346,17 +346,18 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "6f0e6991b1cc1aed",
+  "active": "01aa52feaf57f1ed",
   "lastOpenFiles": [
+    "Rust Notes/Functions and Blocks.md",
+    "never.md",
+    "Rust Notes/Data Type Size.md",
     "Rust Notes/Generics and Traits.md",
     "Rust Notes/Lifetimes and Pointers.md",
     "Rust Notes/Ownership & Borrowing.md",
     "Rust Notes/Rust Atomics and Memory Ordering.md",
     "Rust Notes/Smart Pointers.md",
-    "Rust Notes/Data Type Size.md",
     "Rust Notes/Control Flow.md",
     "Rust Notes/Compound Data Types.md",
-    "Rust Notes/Functions and Blocks.md",
     "Rust Notes/Collections and Data Structures.md",
     "Rust Notes/Code Organization and Visibility.md",
     "Rust Notes/Functional Programming.md",

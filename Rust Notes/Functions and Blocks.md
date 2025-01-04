@@ -99,91 +99,9 @@ let result1 = apply_operation(5, 3, add);
 let result2 = apply_operation(5, 3, multiply);
 ```
 
-## **The `!` Type**
-The `!` type is unique in Rust and represents the **never type**, which means "this function does not return." It is a "bottom type" in Rust's type system and can be coerced into any other type.
-This makes the `!` type fundamental to Rust's type system in dealing with divergent behavior, such as errors, infinite loops, or unreachable code.
-### **Characteristics of the `!` Type**
-1. **Non-returning Behavior**:
-    - A value of type `!` never exists, and functions or expressions with this type will never return control to the caller.
-2. **Bottom Type**:
-    - `!` is a **bottom type**, meaning it can be coerced into any other type. This allows it to integrate seamlessly into code where different types are expected.
-3. **Used for Diverging Functions**:
-    - Functions or expressions that never produce a value are assigned the `!` type.
-### Type Coercion with `!`
-The `!` type can be coerced into any other type because it represents a value that **never exists**. This makes it useful in control flow, especially with constructs like `match`.
-```rust
-fn process_input(input: Option<&str>) -> i32 {
-    match input {
-        Some(value) => value.len() as i32,
-        None => panic!("Input is required!"), // `panic!` returns `!`, coercing to `i32`
-    }
-}
-
-fn process_number(n: i32) -> Option<i32> {
-    if n < 0 {
-        return None;
-    }
-    
-    let result = match n {
-        0 => panic!("Zero not allowed"), // ! coerces to Option<i32>
-        n => Some(n * 2),
-    };
-    result
-}
-
-```
-### `!` in Expressions
-Blocks or expressions that end in a diverging function will have the type `!`.
-```rust
-fn example() -> i32 {
-    let x: i32 = {
-        panic!("This will panic and never return!");
-    }; // The `panic!` call makes the block have type `!`, which is coerced to `i32`.
-}
-```
-### ### **`!` and Unreachable Code**
-Rust provides the `unreachable!` macro, which acts as a placeholder for code that should never execute. The macro has a return type of `!`.
-```rust
-fn process_number(n: i32) -> i32 {
-    match n {
-        1 => 10,
-        2 => 20,
-        _ => unreachable!("Unexpected number!"), // `unreachable!` has type `!`
-    }
-}
-```
-
-### Error Handling
-```rust
-fn critical_operation() -> Result<(), !> {
-    // Operation that can't fail
-    Ok(())
-}
-
-// Using with custom error types
-enum MyError {
-    Fatal(String),
-    Recoverable(i32),
-}
-
-fn handle_error(error: MyError) -> ! {
-    match error {
-        MyError::Fatal(msg) => panic!("Fatal error: {}", msg),
-        MyError::Recoverable(_) => unreachable!("Should be handled elsewhere"),
-    }
-}
-```
-### Key Points
-- `!` represents computations that never produce a value
-- Can coerce into any other type
-- Common in error handling and program control flow
-- Used with `panic!`, `unreachable!`, `continue`, `break`, etc.
-- Useful for expressing type system guarantees
-- Different from `()` (unit type) which is a normal "empty" value
----
-### Diverging Functions
-A **diverging function** in Rust is a special kind of function that never returns to the caller. Instead of having a return type like `i32` or `()`, diverging functions are declared with the return type `!` (pronounced "never").
-#### Key Characteristics of Diverging Functions
+## Diverging Functions
+A **diverging function** in Rust is a special kind of function that never returns to the caller. Instead of having a return type like `i32` or `()`, diverging functions are declared with the return type `!` (pronounced [[Data Type Size#**The `!` Type**|never]]).
+### Key Characteristics of Diverging Functions
 1. **Never Return**:
     - These functions either loop indefinitely, terminate the program, or cause the thread to panic.
 2. **Return Type `!`**:
@@ -192,7 +110,7 @@ A **diverging function** in Rust is a special kind of function that never return
     - Error handling (`panic!`).
     - Infinite loops.
     - Abnormal termination of the program.
-#### Use Cases for Diverging Functions
+### Use Cases for Diverging Functions
 1. **Error Handling**: Diverging functions like `panic!` are used for unrecoverable errors.
 ```rust
 fn get_config_value() -> i32 {
