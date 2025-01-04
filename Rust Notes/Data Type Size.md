@@ -315,7 +315,114 @@ let holder = SliceHolder {
 };
 ```
 ### Special Cases with Trait Objects
-
 #### Structs with `dyn Trait` Fields
-
 - Trait objects (`dyn Trait`) are inherently unsized, so they must also be the last field and placed behind a pointer:
+```rust
+struct TraitHolder {
+    name: String,
+    behavior: Box<dyn std::fmt::Debug>, // `dyn Debug` is unsized, so it must be behind a pointer.
+}
+```
+## Practical Examples
+### Example 1: Struct with a Dynamically Sized Field
+```rust
+struct CustomString {
+    length: usize,
+    content: str, // Error: `str` must be the last field and unsized.
+}
+
+// Correct:
+struct CustomString {
+    length: usize,
+    content: Box<str>, // Place `str` behind a pointer.
+}
+
+let my_string = CustomString {
+    length: 5,
+    content: "hello".into(), // Convert to Box<str>.
+};
+```
+### Example 2: Unsized Types in Generic Structs
+```rust
+struct Container<T: ?Sized> {
+    name: String,
+    value: Box<T>, // `T` is unsized but placed behind a pointer.
+}
+
+let my_container: Container<dyn std::fmt::Debug> = Container {
+    name: "example".to_string(),
+    value: Box::new(42), // Box<dyn Debug>
+};
+```
+### Example 3: Combining Unsized Types and Slices
+```rust
+struct SliceWrapper<T: ?Sized> {
+    length: usize,
+    data: [T], // Error: `[T]` must be behind a pointer.
+}
+
+// Correct version:
+struct SliceWrapper<T: ?Sized> {
+    length: usize,
+    data: Box<[T]>, // Dynamically sized `[T]` behind a pointer.
+}
+
+let numbers = vec![1, 2, 3];
+let wrapper = SliceWrapper {
+    length: numbers.len(),
+    data: numbers.into_boxed_slice(),
+};
+```
+## Multiple dynamic size fields
+> [!tip] If you need more than one dynamically sized field in a struct in Rust, you cannot directly store multiple unsized fields (e.g., slices, `dyn Trait`, or `str`) because Rust requires that only the last field of a struct be unsized. However, you can work around this limitation by using **pointers** (e.g., `Box`, `Rc`, `Arc`, or references) to store each unsized field. This approach ensures that the struct itself remains `Sized`, and only the pointed-to data is dynamically sized.
+### 1. Use Pointers for Each Dynamically Sized Field
+Instead of directly embedding unsized fields in the struct, place them behind smart pointers (e.g., `Box`, `Rc`, or `Arc`) or references.
+```rust
+struct MultiDynamic {
+    name: Box<str>,          // Dynamically sized string slice
+    data: Box<[u8]>,         // Dynamically sized slice of bytes
+    behavior: Box<dyn Fn()>, // Trait object
+}
+
+fn main() {
+    let dynamic_struct = MultiDynamic {
+        name: "Hello".into(),             // Box<str>
+        data: vec![1, 2, 3].into_boxed_slice(), // Box<[u8]>
+        behavior: Box::new(|| println!("Hello, World!")), // Box<dyn Fn()>
+    };
+
+    println!("{}", dynamic_struct.name);
+    println!("{:?}", dynamic_struct.data);
+    (dynamic_struct.behavior)();
+}
+```
+This approach ensures that the struct is `Sized` because all dynamically sized fields are stored behind pointers.
+### 2. Nested Structs
+If you want to group related unsized fields together, you can use **nested structs** where each struct has a single unsized field. Each nested struct becomes dynamically sized, but the outer struct remains `Sized` as long as it uses pointers.
+**Example**:
+```rust
+struct NameField {
+    name: str, // Unsized field
+}
+
+struct DataField {
+    data: [u8], // Unsized field
+}
+
+struct MultiDynamic {
+    name: Box<NameField>,
+    data: Box<DataField>,
+}
+
+fn main() {
+    let name = Box::new(NameField { name: *"Hello" });
+    let data = Box::new(DataField { data: *[1, 2, 3] });
+
+    let dynamic_struct = MultiDynamic { name, data };
+
+    println!("{}", dynamic_struct.name.name);
+    println!("{:?}", dynamic_struct.data.data);
+}
+```
+By nesting the unsized fields inside their own structs, you can manage multiple unsized fields while keeping the top-level struct usable.
+

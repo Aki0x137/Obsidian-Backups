@@ -442,9 +442,9 @@ fn main() {
 }
 ```
 This ensures **memory safety** and prevents scenarios like **use-after-free** or **data races**.
-## **2. Dereferencing Smart Pointers**
+## 2. Dereferencing Smart Pointers
 Smart pointers in Rust, such as `Box<T>`, `Rc<T>`, and `RefCell<T>`, manage ownership of data and provide controlled dereferencing through traits like `Deref` and `DerefMut`.
-### **Using `Box<T>`**
+### Using `Box<T>`
 A `Box<T>` is a smart pointer for heap-allocated data. Dereferencing a `Box` gives you access to the underlying value.
 ```rust
 fn main() {
@@ -453,7 +453,7 @@ fn main() {
     println!("Value through Box: {}", *boxed); // Dereferencing the Box
 }
 ```
-### **Using `Rc<T>`**
+### Using `Rc<T>`
 `Rc<T>` is a reference-counted smart pointer, allowing shared ownership. You can dereference an `Rc` like a regular pointer.
 ```rust
 use std::rc::Rc;
@@ -465,7 +465,7 @@ fn main() {
 }
 ```
 
-### **`Deref` and `DerefMut` Traits**
+### `Deref` and `DerefMut` Traits`
 Rust uses the `Deref` and `DerefMut` traits to define custom dereferencing behavior for smart pointers.
 #### Rules:
 1. **Immutable Dereferencing (`Deref`)**:
@@ -509,7 +509,7 @@ fn main() {
     println!("Updated value: {}", *my_box);
 }
 ```
-## **3. Dereferencing Raw Pointers**
+## 3. Dereferencing Raw Pointers
 Raw pointers (`*const T` and `*mut T`) are used for low-level memory access. Dereferencing them is unsafe because Rust cannot guarantee their validity.
 #### Example:
 ```rust
@@ -525,7 +525,7 @@ fn main() {
 #### Rules:
 - Dereferencing raw pointers requires an `unsafe` block.
 - Use with extreme care to avoid invalid memory access or undefined behavior.
-## **4. Deref Coercion**
+## 4. Deref Coercion
 Rust performs **deref coercion** automatically to make smart pointers behave like references. This happens when a smart pointer is used in a context where a reference is expected.
 ### Example:
 ```rust
@@ -551,14 +551,14 @@ fn main() {
     hello(&name); // Deref coercion: MyBox<String> -> &String -> &str
 }
 ```
-## **5. Safety Rules**
-### **Immutable Dereferencing**
+## 5. Safety Rules
+### Immutable Dereferencing
 - Always safe because the data cannot be modified.
 - Multiple immutable de-references are allowed.
-### **Mutable Dereferencing**
+### Mutable Dereferencing
 - Safe only if no other references (mutable or immutable) exist to the same value.
 - Rust’s borrow checker enforces this at compile time.
-### **Raw Pointers**
+### Raw Pointers
 - Dereferencing requires `unsafe` because Rust cannot validate memory safety.
 - Use when interacting with low-level C APIs or doing manual memory management.
 
