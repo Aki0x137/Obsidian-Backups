@@ -750,3 +750,11 @@ The Rust compiler leverages ZSTs to optimize runtime performance:
     - Useful for static analysis and type safety.
     - Automatically optimized by the compiler for performance.
 
+## Key Differences b/w Unit and Never Type
+
+| Aspect                | Unit Type (`()`)                            | Never Type (`!`)                                    |
+| --------------------- | ------------------------------------------- | --------------------------------------------------- |
+| **Meaning**           | Represents the absence of meaningful data.  | Represents computations that never produce a value. |
+| **Value**             | Has one value: `()`.                        | Has no value (divergent type).                      |
+| **Function Behavior** | Functions returning `()` complete normally. | Functions returning `!` never complete normally.    |
+| **Coercion**          | Cannot be coerced into other types.         | Can be coerced into all types.                      |
