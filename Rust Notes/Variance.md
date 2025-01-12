@@ -285,7 +285,7 @@ fn main() {
 ```
 **Explanation**:
 - Here, `ref1` is copied into `ref2`. Both references point to the same `value`, and neither invalidates the other.
-### Mutable References (`&mut T`) are Moved
+## Mutable References (`&mut T`) are Moved
 - **Behavior**:
     - Mutable references (`&mut T`) do **not implement the `Copy` trait**, so they are moved instead of copied.
     - This ensures **exclusive access** to the underlying data, as Rust enforces the rule that only **one mutable reference** can exist at a time.
@@ -324,7 +324,7 @@ fn main() {
 - **Mutable References**:
     - Use when you need **exclusive, mutable access** to a value.
     - You must carefully manage ownership and borrowing to avoid invalidating references.
-### Example: Mixing Immutable and Mutable References
+## Example: Mixing Immutable and Mutable References
 Rust strictly enforces the **"no aliasing and mutability" rule**:
 - You cannot have a mutable reference and an immutable reference to the same value at the same time.
 ```rust
