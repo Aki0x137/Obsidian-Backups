@@ -181,12 +181,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Rust Notes/Threads and Concurrency.md",
+                "file": "Rust Notes/Variance.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Threads and Concurrency"
+              "title": "Variance"
             }
           }
         ],
@@ -308,10 +308,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Rust Notes/Threads and Concurrency.md"
+                "file": "Rust Notes/Variance.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Threads and Concurrency"
+              "title": "Outline of Variance"
             }
           }
         ],
@@ -334,8 +334,9 @@
   },
   "active": "6f0e6991b1cc1aed",
   "lastOpenFiles": [
-    "Rust Notes/Data Type Size.md",
     "Rust Notes/Threads and Concurrency.md",
+    "Rust Notes/Variance.md",
+    "Rust Notes/Data Type Size.md",
     "Rust Notes/Functions and Blocks.md",
     "never.md",
     "Rust Notes/Generics and Traits.md",
@@ -366,7 +367,6 @@
     "Go Concurrency/Channel Ownership & Closing.md",
     "Go Concurrency/Basics.md",
     "Distributed-Systems-Cohort/Thinking Concurrency.md",
-    "Distributed-Systems-Cohort/{Draft} Non Blocking Data Structures.md",
     "Go Concurrency",
     "Observability and OpenTelemetry",
     "Excalidraw",
