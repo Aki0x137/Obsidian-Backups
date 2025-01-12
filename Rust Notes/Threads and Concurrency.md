@@ -19,3 +19,5 @@ scoped threads
 thread parking
 
 async programming
+	- uses cooperative scheduling
+	- 
