@@ -970,3 +970,22 @@ fn main() {
 ## **Enums and Memory Layout**:
 Rust optimizes the memory layout of enums. If an enum can only hold one variant at a time, its size is the maximum of its largest variant plus a discriminant.
 
+## `ref mut`
+- **Purpose**: `ref mut` is used in **pattern matching** to bind a mutable reference from an existing mutable value (like destructuring).
+- **Context**: It is used in `match` expressions, `if let`, or `while let` constructs when you want to mutate the referenced value.
+- **Usage**: Extracts a mutable reference to part of a value during pattern matching.
+Example:
+```rust
+fn main() {
+    let mut tuple = (42, "hello");
+    
+    match tuple {
+        (ref mut num, _) => {
+            *num += 1; // Mutate `num` via the mutable reference
+        }
+    }
+    
+    println!("{:?}", tuple); // (43, "hello")
+}
+```
+- `ref mut num` creates a mutable reference to the first element of the tuple (`42`) so that it can be modified.
